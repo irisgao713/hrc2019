@@ -26,4 +26,3 @@ process.crawl(CLSpider)
 # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
 # process.crawl(VSpider)
 process.start()
-import pudb; pudb.set_trace()
