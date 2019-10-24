@@ -3,14 +3,14 @@ import scrapy
 import sys
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-
+from rental_crawlers.items import CLItem
 
 class CLSpider(CrawlSpider):
 
     name = 'cl_listings'
     allowed_domains = ['vancouver.craigslist.org']
     start_urls = [
-        'https://vancouver.craigslist.org/search/apa?',
+        'https://vancouver.craigslist.org/search/apa',
         'https://vancouver.craigslist.org/search/rds/apa'
     ]
     #rooms for rent 'https://vancouver.craigslist.ca/rds/roo/' 
