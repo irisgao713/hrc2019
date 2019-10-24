@@ -10,7 +10,8 @@ class CLSpider(CrawlSpider):
     name = 'cl_listings'
     allowed_domains = ['vancouver.craigslist.ca']
     start_urls = [
-        'https://vancouver.craigslist.ca/search/apa?'
+        'https://vancouver.craigslist.org/search/apa?',
+        'https://vancouver.craigslist.ca/search/rds/apa'
     ]
     #rooms for rent 'https://vancouver.craigslist.ca/rds/roo/' 
     #apartments 'https://vancouver.craigslist.ca/search/rds/apa'
