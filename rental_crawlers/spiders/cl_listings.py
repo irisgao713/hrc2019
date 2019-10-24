@@ -8,10 +8,10 @@ from scrapy.linkextractors import LinkExtractor
 class CLSpider(CrawlSpider):
 
     name = 'cl_listings'
-    allowed_domains = ['vancouver.craigslist.ca']
+    allowed_domains = ['vancouver.craigslist.org']
     start_urls = [
         'https://vancouver.craigslist.org/search/apa?',
-        'https://vancouver.craigslist.ca/search/rds/apa'
+        'https://vancouver.craigslist.org/search/rds/apa'
     ]
     #rooms for rent 'https://vancouver.craigslist.ca/rds/roo/' 
     #apartments 'https://vancouver.craigslist.ca/search/rds/apa'
@@ -30,6 +30,7 @@ class CLSpider(CrawlSpider):
         'DELTAFETCH_ENABLED': True,
         'SPIDER_MIDDLEWARES': {
             'scrapy_deltafetch.DeltaFetch': 120,
+            'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
             'rental_crawlers.pipelines.CLPipeline': 300,
