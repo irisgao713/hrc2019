@@ -49,7 +49,6 @@ class CLSpider(CrawlSpider):
     '''
     def parse_listings(self, response):
         item = CLItem()
-        printf('!!!!!!!!!!!!! Parsing: %s !!!!!!!!!!!!!' % response.url)
         item['title'] = response.xpath('//span[@id="titletextonly"]/text()').extract_first()
         item['location'] = response.xpath('//small/text()').extract_first()
         item['sqft'] = response.xpath('//span[@class="housing"]/text()').extract_first()
