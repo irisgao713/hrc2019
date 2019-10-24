@@ -10,7 +10,7 @@ class CLSpider(CrawlSpider):
     name = 'cl_listings'
     allowed_domains = ['vancouver.craigslist.ca']
     start_urls = [
-        'https://vancouver.craigslist.org/search/apa?'
+        'https://vancouver.craigslist.ca/search/apa?'
     ]
     #rooms for rent 'https://vancouver.craigslist.ca/rds/roo/' 
     #apartments 'https://vancouver.craigslist.ca/search/rds/apa'
@@ -19,7 +19,7 @@ class CLSpider(CrawlSpider):
     '''
     rules = (
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
-        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "next")]')), follow=True, callback='parse_listings')
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
    
        # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
     )
