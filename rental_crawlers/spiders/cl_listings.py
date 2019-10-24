@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import sys
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
@@ -23,24 +24,24 @@ class CLSpider(CrawlSpider):
        # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
     )
 
-    # custom_settings = {
-    #     'LOG_LEVEL': 'INFO',
-    #     'DELTAFETCH_ENABLED': True,
-    #     'SPIDER_MIDDLEWARES': {
-    #         'scrapy_deltafetch.DeltaFetch': 120,
-    #     },
-    #     'ITEM_PIPELINES' : {
-    #         'rental_crawlers.pipelines.CLPipeline': 300,
-    #     }
-    # }
-
     custom_settings = {
-        'LOG_LEVEL': 'DEBUG',
-        
+        'LOG_LEVEL': 'INFO',
+        'DELTAFETCH_ENABLED': True,
+        'SPIDER_MIDDLEWARES': {
+            'scrapy_deltafetch.DeltaFetch': 120,
+        },
         'ITEM_PIPELINES' : {
             'rental_crawlers.pipelines.CLPipeline': 300,
         }
     }
+
+    # custom_settings = {
+    #     'LOG_LEVEL': 'DEBUG',
+        
+    #     'ITEM_PIPELINES' : {
+    #         'rental_crawlers.pipelines.CLPipeline': 300,
+    #     }
+    # }
 
     '''
     Callback method for parsing the response text into a CLItem. 
