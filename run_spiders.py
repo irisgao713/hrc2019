@@ -11,7 +11,7 @@ from rental_crawlers.spiders.cl_listings import CLSpider
 time.sleep(random.randint(1,15)*60)
 
 #Gets today's date and returns it in isoformat YYYY-MM-DD
-month = datetime.date.today().strftime("%Y-%m")
+month = datetime.date.today().strftime("%Y-%m-%d")
 
 # FEED_FORMAT is the output file type (accepts csv, json)
 # FEED_URI is the name of the output file (if no path specified, will put in same folder as where script is)
