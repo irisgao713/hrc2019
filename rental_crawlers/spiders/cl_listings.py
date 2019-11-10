@@ -3,6 +3,7 @@ import scrapy
 import sys
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
+from scrapy.selector import HtmlXPathSelector
 from rental_crawlers.items import CLItem
 
 class CLSpider(CrawlSpider):
@@ -49,6 +50,7 @@ class CLSpider(CrawlSpider):
     '''
     def parse_listings(self, response):
         item = CLItem()
+        hxs = HtmlXPathSelector(response)
         item['title'] = response.xpath('//span[@id="titletextonly"]/text()').extract_first()
         item['location'] = response.xpath('//small/text()').extract_first()
         item['sqft'] = response.xpath('//span[@class="housing"]/text()').extract_first()
@@ -56,7 +58,8 @@ class CLSpider(CrawlSpider):
         item['date'] = response.xpath('//time/@datetime').extract_first()
         item['lat'] = response.xpath('//div/@data-latitude').extract_first()
         item['long'] = response.xpath('//div/@data-longitude').extract_first()
-        item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
+        #item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
+        item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract()
         item['url'] = response.url
         item['source'] = "Craigslist"
         #NEW ITEMS
@@ -64,12 +67,12 @@ class CLSpider(CrawlSpider):
         item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
         
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
-        num_img = response.xpath('//div[@id="thumbs"]/a[last()]/title')
+        num_img = hxs.select('//div[contains(@id, "image")]/@title')[-1]
         
         if not len(map_address) < 1:
             item['map_address'] = map_address.extract_first()
         if not len(num_img) < 1:
-            item['num_of_images'] = num_img.extract_first()
+            item['num_of_images'] = num_img.extract()
         
         yield item
 
