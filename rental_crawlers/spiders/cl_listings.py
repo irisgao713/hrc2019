@@ -3,7 +3,7 @@ import scrapy
 import sys
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-from scrapy.selector import HtmlXPathSelector
+from scrapy.selector import *
 from rental_crawlers.items import CLItem
 
 class CLSpider(CrawlSpider):
