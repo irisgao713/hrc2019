@@ -66,9 +66,9 @@ class CLSpider(CrawlSpider):
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
         num_img = response.xpath('//div[@id="thumbs"]/a/[last()]/title')
         
-        if !(len(map_address) < 1)
+        if not(len(map_address) < 1)
             item['map_address'] = map_address.extract_first()
-        if !(len(num_img) < 1)
+        if not(len(num_img) < 1)
             item['num_of_images'] = num_img.extract_first()
         
         yield item
