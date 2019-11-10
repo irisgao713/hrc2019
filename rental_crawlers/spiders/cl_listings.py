@@ -60,9 +60,16 @@ class CLSpider(CrawlSpider):
         item['url'] = response.url
         item['source'] = "Craigslist"
         #NEW ITEMS
+
         item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
-        item['map_address'] = response.xpath('//div[@class="mapaddress"]/text()').extract_first()
-        item['num_of_images'] = response.xpath('//div[@id="thumbs"]/a/[last()]/title').extract_first()
+        
+        map_address = response.xpath('//div[@class="mapaddress"]/text()')
+        num_img = response.xpath('//div[@id="thumbs"]/a/[last()]/title')
+        
+        if !(len(map_address) < 1)
+            item['map_address'] = map_address.extract_first()
+        if !(len(num_img) < 1)
+            item['num_of_images'] = num_img.extract_first()
         
         yield item
 
