@@ -3,7 +3,6 @@ import scrapy
 import sys
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-from scrapy.selector import *
 from rental_crawlers.items import CLItem
 
 class CLSpider(CrawlSpider):
@@ -50,7 +49,7 @@ class CLSpider(CrawlSpider):
     '''
     def parse_listings(self, response):
         item = CLItem()
-        hxs = HtmlXPathSelector(response)
+
         item['title'] = response.xpath('//span[@id="titletextonly"]/text()').extract_first()
         item['location'] = response.xpath('//small/text()').extract_first()
         item['sqft'] = response.xpath('//span[@class="housing"]/text()').extract_first()
@@ -67,7 +66,7 @@ class CLSpider(CrawlSpider):
         item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
         
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
-        num_img = hxs.select('//div[contains(@id, "image")]/@title')[-1]
+        num_img = response.xpath('//div[contains(@id, "image")]/@title')[-1]
         
         if not len(map_address) < 1:
             item['map_address'] = map_address.extract_first()
