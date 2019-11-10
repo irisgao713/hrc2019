@@ -37,3 +37,6 @@ class CLItem(scrapy.Item):
     province = scrapy.Field()
     country = scrapy.Field()
     source = scrapy.Field()
+    location_accuracy = scrapy.Field()
+    map_address = scrapy.Field()
+    num_of_images = scrapy.Field()
