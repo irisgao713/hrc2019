@@ -64,7 +64,7 @@ class CLSpider(CrawlSpider):
         item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
         
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
-        num_img = response.xpath('//div[@id="thumbs"]/a/[last()]/title')
+        num_img = response.xpath('//div[@id="thumbs"]/a[last()]/title')
         
         if not len(map_address) < 1:
             item['map_address'] = map_address.extract_first()
