@@ -61,18 +61,23 @@ class CLSpider(CrawlSpider):
         item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract()
         item['url'] = response.url
         item['source'] = "Craigslist"
+        item['city'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a').extract_first()
         #NEW ITEMS
 
         item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
         
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
         num_img = response.xpath('//div[contains(@id, "image")]/@title')[-1]
-        
+        tags = response.xpath('//p[@class = "attrgroup"]/span')
+
         if not len(map_address) < 1:
             item['map_address'] = map_address.extract_first()
         if not len(num_img) < 1:
             item['num_of_images'] = num_img.extract()
+        if not len(tags) < 1:
+            item['tags'] = tags.extract()    
         
         yield item
 
 #terminal: scrapy crawl [name] -o [filename]
+

@@ -18,6 +18,11 @@ Custom definition for fields for Item used by the CL_listings spider.
     longitude: approximate longitude. Optional.
     description: body of the listing
     url: link to the listing
+    source = webpage source
+    location_accuracy = standard error of the lat/long
+    map_address = address that is displayed in the map field
+    num_of_images = the number of images on the webpage
+    tags = feature tags
 '''
 
 
@@ -32,11 +37,12 @@ class CLItem(scrapy.Item):
     long = scrapy.Field()
     description = scrapy.Field()
     url = scrapy.Field()
-    address = scrapy.Field()
+    #address = scrapy.Field()
     city = scrapy.Field()
-    province = scrapy.Field()
-    country = scrapy.Field()
+    #province = scrapy.Field()
+    #country = scrapy.Field()
     source = scrapy.Field()
     location_accuracy = scrapy.Field()
     map_address = scrapy.Field()
     num_of_images = scrapy.Field()
+    tags = scrapy.Field()
