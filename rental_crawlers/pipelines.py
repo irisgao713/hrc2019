@@ -29,6 +29,10 @@ class CLPipeline(object):
 
             if "rds/roo/" in item['url']:
                 item['rooms'] = "private room"
+
+
+            if not item['description'] is None:
+                item['description'] = re.sub("[ ,]", "+", item['description'].strip())
         return item
 
 
