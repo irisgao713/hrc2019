@@ -58,7 +58,7 @@ class CLSpider(CrawlSpider):
         item['lat'] = response.xpath('//div/@data-latitude').extract_first()
         item['long'] = response.xpath('//div/@data-longitude').extract_first()
         #item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
-        item['description'] = response.xpath('//section[@id="postingbody"]/br/text()').extract()
+        item['description'] = response.xpath('string(//section[@id="postingbody"])').extract()
         item['url'] = response.url
         item['source'] = "Craigslist"
         item['city'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a/text()').extract_first()
