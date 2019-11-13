@@ -32,8 +32,8 @@ class CLPipeline(object):
 
 
             if not item['description'] is None:
-                cleaned = re.sub("[,*]", "+", item['description'].strip())
-                item['description'] = "+".join(" ".join(cleaned))
+                cleaned = re.sub("[,*]", "+", item['description'])
+                item['description'] = "+".join(" ".join(cleaned)).strip()
 
 
 
