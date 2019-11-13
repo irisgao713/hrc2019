@@ -77,7 +77,7 @@ class CLSpider(CrawlSpider):
             item['num_of_images'] = num_img.extract()
         
         if not len(tags) < 1:
-            item['tags'] = tags.extract()    
+            item['tags'] = tags.extract_first()    
         
         yield item
 

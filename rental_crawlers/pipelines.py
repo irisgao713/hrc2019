@@ -31,9 +31,14 @@ class CLPipeline(object):
                 item['rooms'] = "private room"
 
 
-            if not item['description'] is None:
-                des = "+".join(line for line in item['description'])
-                item['description'] = re.sub("[ ,]", "+", des.strip())
+            # if not item['description'] is None:
+            #     des = "+".join(line for line in item['description'])
+            #     item['description'] = re.sub("[ ,]", "+", des.strip())
+
+
+            # if not item['tags'] is None:
+            #     des = "+".join(line for line in item['tags'])
+            #     item['tags'] = re.sub("[ ,]", "+", des.strip())
         return item
 
 
