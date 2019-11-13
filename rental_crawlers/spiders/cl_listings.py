@@ -66,16 +66,14 @@ class CLSpider(CrawlSpider):
         #NEW ITEMS
 
         item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
-        
+        item['num_of_images']= len(response.xpath('//div[@class = "swipe-wrap"]/div').extract())
+
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
-        num_img = response.xpath('//div[contains(@id, "image")]/@title')
+        
         tags = response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()')
 
         if not len(map_address) < 1:
             item['map_address'] = map_address.extract_first()
-    
-        if not len(num_img) < 1:
-            item['num_of_images'] = num_img.extract()[-1]
         
         if not len(tags) < 1:
             item['tags'] = tags.extract() 
