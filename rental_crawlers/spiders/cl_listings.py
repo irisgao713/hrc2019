@@ -83,4 +83,3 @@ class CLSpider(CrawlSpider):
         yield item
 
 #terminal: scrapy crawl [name] -o [filename]
-//*[@id="8_image_axpaAbgsro8"]
