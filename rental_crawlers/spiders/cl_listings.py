@@ -77,9 +77,8 @@ class CLSpider(CrawlSpider):
             item['num_of_images'] = num_img.extract()
         
         if not len(tags) < 1:
-            item['tags'] = tags.extract_first()    
+            item['tags'] = tags.extract() 
         
         yield item
 
 #terminal: scrapy crawl [name] -o [filename]
-
