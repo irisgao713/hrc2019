@@ -62,7 +62,7 @@ class CLSpider(CrawlSpider):
         
         item['url'] = response.url
         item['source'] = "Craigslist"
-        item['city'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a/text()').extract_first()
+        item['domain'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a/text()').extract_first()
         #NEW ITEMS
 
         item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
@@ -71,7 +71,7 @@ class CLSpider(CrawlSpider):
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
         
         t1= response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()').exrtact()
-        t2 = selector.xpath('//p[@class = "attrgroup"]/span/text()').extract()
+        t2 = response.xpath('//p[@class = "attrgroup"]/span/text()').extract()
         item['tags']= t1+t2
 
         if not len(map_address) < 1:

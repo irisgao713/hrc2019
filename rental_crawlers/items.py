@@ -38,7 +38,7 @@ class CLItem(scrapy.Item):
     description = scrapy.Field()
     url = scrapy.Field()
     #address = scrapy.Field()
-    city = scrapy.Field()
+    domain = scrapy.Field()
     #province = scrapy.Field()
     #country = scrapy.Field()
     source = scrapy.Field()
