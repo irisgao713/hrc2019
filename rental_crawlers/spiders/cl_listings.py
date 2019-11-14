@@ -70,13 +70,15 @@ class CLSpider(CrawlSpider):
 
         map_address = response.xpath('//div[@class="mapaddress"]/text()')
         
-        tags = response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()')
+        t1= response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()').exrtact()
+        t2 = selector.xpath('//p[@class = "attrgroup"]/span/text()').extract()
+        item['tags']= t1+t2
 
         if not len(map_address) < 1:
             item['map_address'] = map_address.extract_first()
         
-        if not len(tags) < 1:
-            item['tags'] = tags.extract() 
+        # if not len(tags) < 1 and not len(t2) < 1:
+            # item['tags'] = tags.extract() 
         
         yield item
 
