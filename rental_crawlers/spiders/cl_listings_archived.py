@@ -5,10 +5,11 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from rental_crawlers.items import CLItem
 
-class CLSpider(CrawlSpider):
+class CLASpider(CrawlSpider):
 
-    name = 'cl_listings'
-    allowed_domains = ['vancouver.craigslist.org']
+    name = 'cl_listings_archived'
+    allowed_domains = []
+
     start_urls = [
         'https://vancouver.craigslist.org/search/apa'
         'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
@@ -17,7 +18,7 @@ class CLSpider(CrawlSpider):
     '''
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
-    rules = (
+    rules = ( 
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
    
