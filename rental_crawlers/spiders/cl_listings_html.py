@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import sys
+import os
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 #from rental_crawlers.items import CLItem
@@ -44,7 +45,12 @@ class CLWebSpider(CrawlSpider):
     '''
     def archive_listings(self, res):
         month = datetime.date.today().strftime("%Y-%m-%d")
-        path = "../results/raw_html/" + month + "/" + self.hash_url(res.url)
+
+        folder = "../results/raw_html/" + month 
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+
+        path = folder + "/" + self.hash_url(res.url)
         
         with open(path, 'w') as f:
             f.write(res.body)
