@@ -3,6 +3,7 @@ import datetime
 import random
 import time
 import sys
+import glob
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from try_arg import tryarg
@@ -45,4 +46,3 @@ elif mode == 'web':
     process = CrawlerProcess()
     process.crawl(CLWebSpider)
     process.start()
-

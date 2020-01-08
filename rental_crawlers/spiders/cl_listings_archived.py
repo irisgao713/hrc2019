@@ -10,20 +10,20 @@ class CLASpider(CrawlSpider):
     name = 'cl_listings_archived'
     allowed_domains = []
 
-    start_urls = [
-        'https://vancouver.craigslist.org/search/apa'
-        'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
-    ]
+    # start_urls = [
+    #     'https://vancouver.craigslist.org/search/apa'
+    #     'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
+    # ]
 
     '''
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
-    rules = ( 
-        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
-        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
+    # rules = ( 
+    #     Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
+    #     Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
    
-       # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
-    )
+    #    # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
+    # )
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',

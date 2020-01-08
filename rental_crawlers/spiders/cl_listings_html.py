@@ -44,17 +44,16 @@ class CLWebSpider(CrawlSpider):
     '''
     def archive_listings(self, res):
         month = datetime.date.today().strftime("%Y-%m-%d")
-        #path = "../results/raw_html/" + month + "/" + hash_url(res.url)
-        path = "../results/raw_html/" + month + "/" + res.url
+        path = "../results/raw_html/" + month + "/" + self.hash_url(res.url)
+        
         with open(path, 'w') as f:
             f.write(res.body)
 
     '''
     To generate file name from url instead of using url as file name
     '''
-    # def hash_url(url):
-    #     m = hashlib.md5
-    #     return m.new(url).digest() + ".html"
+    def hash_url(self,url):
+        return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
 
  
 
