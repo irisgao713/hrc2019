@@ -46,3 +46,12 @@ elif mode == 'web':
     process = CrawlerProcess()
     process.crawl(CLWebSpider)
     process.start()
+
+elif mode == 'normal':
+    process = CrawlerProcess()
+    process.crawl(CLSpider)
+    process.start()
+
+else:
+    print ('Please use one of the following modes: web, archive, normal')
+    

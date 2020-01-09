@@ -52,7 +52,7 @@ class CLWebSpider(CrawlSpider):
 
         path = folder + "/" + self.hash_url(res.url)
         
-        with open(path, 'w') as f:
+        with open(path, 'w+') as f:
             f.write(res.body)
 
     '''
