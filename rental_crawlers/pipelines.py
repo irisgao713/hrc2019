@@ -33,7 +33,11 @@ class CLPipeline(object):
 
             if not item['description'] is None:
                 joined = " ".join(item['description'])
-                item['description']= re.sub("[\"]", "", joined)
+                s = re.sub("[\"]", "", joined)
+                s = re.sub('\s+', ' ', s).rstrip()
+                s = s.replace('QR Code Link to This Post','')
+                s = re.sub('[!@#$*+]', ' ', s)
+                item ['description'] = s
 
 
 

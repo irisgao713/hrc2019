@@ -47,8 +47,8 @@ class CLWebSpider(CrawlSpider):
         month = datetime.date.today().strftime("%Y-%m-%d")
 
         folder = "../results/raw_html/" + month 
-        if not os.path.exists(folder):
-            os.mkdir(folder)
+        # if not os.path.exists(folder):
+        #     os.mkdir(folder)
 
         path = folder + "/" + self.hash_url(res.url)
         

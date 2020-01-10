@@ -74,7 +74,10 @@ def process(file_name):
     for j in to_do:
         df[j]=df.apply(clean_symbols,col=j,axis = 1)
     for k in num_only:
-        df[j]=df.apply(get_numbers,col=k,axis = 1)
+        df[k]=df.apply(get_numbers,col=k,axis = 1)
+
+    #df['description'] = df.apply(clean_description,col='description',axis=1)
+    df['url_in_text']= df.apply(find_url,col='description',axis=1)
 
 
     def clean_symbols(row,col):
@@ -83,5 +86,20 @@ def process(file_name):
     def get_numbers(row,col): 
         array = re.findall(r'[0-9]+', str(row[col])) 
         return array 
+
+    def clean_description(row,col)
+        s = str(row[col])
+        s = re.sub('\s+', ' ', s).rstrip()
+        s.replace(' QR Code Link to This Post ','')
+        s = re.sub('[!@#$*+]', ' ', s)
+        return s
+
+    def find_url(row,col)
+        s = str(row[col])
+
+        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',s)
+        urls.extend(re.findall('www[s]?.(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',s))
+        return urls       
+
 
 
