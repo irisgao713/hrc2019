@@ -48,7 +48,11 @@ elif mode == 'web':
     process.start()
 
 elif mode == 'normal':
-    process = CrawlerProcess()
+    process = CrawlerProcess({
+        'USER_AGENT': default_settings.USER_AGENT,
+        'FEED_FORMAT': 'csv',
+        'FEED_URI': "../results/raw/listings-" + month + ".csv"
+    })
     process.crawl(CLSpider)
     process.start()
 
