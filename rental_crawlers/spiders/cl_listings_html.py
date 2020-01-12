@@ -43,17 +43,30 @@ class CLWebSpider(CrawlSpider):
     '''
     Callback method for parsing the response text into a CLItem. 
     '''
+    # def archive_listings(self, res):
+    #     month = datetime.date.today().strftime("%Y-%m-%d")
+
+    #     folder = "../results/raw_html/" + month 
+    #     # if not os.path.exists(folder):
+    #     #     os.mkdir(folder)
+
+    #     path = folder + "/" + self.hash_url(res.url)
+        
+    #     with open(path, 'w+') as f:
+    #         f.write(res.body)
+    #         f.close
+
+
     def archive_listings(self, res):
         month = datetime.date.today().strftime("%Y-%m-%d")
 
-        folder = "../results/raw_html/" + month 
-        # if not os.path.exists(folder):
-        #     os.mkdir(folder)
-
-        path = folder + "/" + self.hash_url(res.url)
-        
-        with open(path, 'w+') as f:
+        folder = "../results/raw_html/" + month       
+        os.makedirs(folder)
+        os.chdir(folder)    
+        hashed = self.hash_url(res.url)   
+        with open(hashed, 'w+') as f:
             f.write(res.body)
+            f.close()
 
     '''
     To generate file name from url instead of using url as file name
