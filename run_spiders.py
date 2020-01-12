@@ -4,6 +4,7 @@ import random
 import time
 import sys
 import glob
+import os
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from try_arg import tryarg
@@ -31,8 +32,11 @@ if mode == 'archived':
     })
     
     extension = 'html'
-    path = '///'+directory+'/*.{}'
-    all_filenames = [i for i in glob.glob(path.format(extension))]
+    path = "../results/raw_html/" + directory +'/*.{}'
+    if not os.path.exists("../results/raw_html/" + directory):
+        print('The directory: ' + str(directory) +' does not exist!')
+        exit 
+    all_filenames = ['file://' + i for i in glob.glob(path.format(extension))]
    
     process.crawl(CLASpider,start_urls = all_filenames)
     # process.crawl(KJSpider)
@@ -58,4 +62,5 @@ elif mode == 'normal':
 
 else:
     print ('Please use one of the following modes: web, archive, normal')
+    exit
     
