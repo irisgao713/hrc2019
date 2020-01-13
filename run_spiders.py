@@ -46,7 +46,14 @@ if mode == 'archived':
 
 
 elif mode == 'web':
+    month = datetime.date.today().strftime("%Y-%m-%d")
 
+
+    folder = "../results/raw_html/" + month       
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+        os.chdir(folder)  
+          
     process = CrawlerProcess()
     process.crawl(CLWebSpider)
     process.start()

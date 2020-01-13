@@ -58,19 +58,13 @@ class CLWebSpider(CrawlSpider):
 
 
     def archive_listings(self, res):
-        month = datetime.date.today().strftime("%Y-%m-%d")
-        owd = os.getcwd()
 
-        folder = "../results/raw_html/" + month       
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-            os.chdir(folder)    
         hashed = self.hash_url(res.url)   
         with open(hashed, 'w+') as f:
             f.write(res.body)
             f.close()
 
-        os.chdir(owd)
+
 
     '''
     To generate file name from url instead of using url as file name
