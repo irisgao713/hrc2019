@@ -39,7 +39,7 @@ if mode == 'archived':
     if not os.path.exists("raw_html/" + directory):
         print('The directory: ' + str(directory) +' does not exist!')
         exit 
-    all_filenames = ['file://' + i for i in glob.glob(path.format(extension))]
+    all_filenames = ['file:///' + i for i in glob.glob(path.format(extension))]
    
      
     process.crawl(CLASpider,start_urls = all_filenames)
