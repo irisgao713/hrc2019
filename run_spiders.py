@@ -32,12 +32,16 @@ if mode == 'archived':
     })
     
     extension = 'html'
-    path = "../results/raw_html/" + directory +'/*.{}'
-    if not os.path.exists("../results/raw_html/" + directory):
+    os.chdir('../results') 
+    #path = "../results/raw_html/" + directory +'/*.{}'
+    #if not os.path.exists("../results/raw_html/" + directory):
+    path = "raw_html/" + directory +'/*.{}'
+    if not os.path.exists("raw_html/" + directory):
         print('The directory: ' + str(directory) +' does not exist!')
         exit 
     all_filenames = ['file://' + i for i in glob.glob(path.format(extension))]
    
+     
     process.crawl(CLASpider,start_urls = all_filenames)
     # process.crawl(KJSpider)
     # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
@@ -53,7 +57,7 @@ elif mode == 'web':
     if not os.path.exists(folder):
         os.makedirs(folder)
         os.chdir(folder)  
-          
+
     process = CrawlerProcess()
     process.crawl(CLWebSpider)
     process.start()
