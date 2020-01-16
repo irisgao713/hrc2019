@@ -62,10 +62,12 @@ class CLWebSpider(CrawlSpider):
 
         hashed_url = self.hash_url(response.url)   
         with open(hashed_url, 'w+') as f:
-            f.write(response.body)
+            f.write(response.body.decode("utf-8"))
             f.close()
         
-        yield hashed_url
+        yield {
+            'url': hashed_url
+        }
 
 
 
