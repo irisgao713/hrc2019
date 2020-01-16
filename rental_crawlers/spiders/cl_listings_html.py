@@ -58,11 +58,11 @@ class CLWebSpider(CrawlSpider):
     #         f.close
 
 
-    def archive_listings(self, res):
+    def archive_listings(self, response):
 
-        hashed_url = self.hash_url(res.url)   
+        hashed_url = self.hash_url(response.url)   
         with open(hashed_url, 'w+') as f:
-            f.write(res.body)
+            f.write(response.body)
             f.close()
         
         yield hashed_url
