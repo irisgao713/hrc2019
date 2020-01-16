@@ -41,7 +41,7 @@ if mode == 'archived':
         exit 
 
     prefix  = os.getcwd()
-    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+    all_filenames = ['file:///' + prefix + '/' + i for i in glob.glob(path.format(extension))]
    
      
     process.crawl(CLASpider,start_urls = all_filenames)
