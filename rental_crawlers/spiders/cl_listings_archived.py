@@ -8,7 +8,7 @@ from rental_crawlers.items import CLItem
 class CLASpider(CrawlSpider):
 
     name = 'cl_listings_archived'
-    allowed_domains = []
+    
 
     # start_urls = [
     #     'https://vancouver.craigslist.org/search/apa'
@@ -27,9 +27,9 @@ class CLASpider(CrawlSpider):
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
-        'DELTAFETCH_ENABLED': True,
+        #'DELTAFETCH_ENABLED': True,
         'SPIDER_MIDDLEWARES': {
-            'scrapy_deltafetch.DeltaFetch': 120,
+            #'scrapy_deltafetch.DeltaFetch': 120,
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
