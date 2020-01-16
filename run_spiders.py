@@ -5,6 +5,7 @@ import time
 import sys
 import glob
 import os
+import shutil
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from try_arg import tryarg
@@ -58,11 +59,12 @@ elif mode == 'web':
     folder = "../results/raw_html/" + month       
     if not os.path.exists(folder):
         os.makedirs(folder)
-        os.chdir(folder)  
+        #os.chdir(folder)  
 
     process = CrawlerProcess()
     process.crawl(CLWebSpider)
     process.start()
+    movefile(folder)
 
 elif mode == 'normal':
     process = CrawlerProcess({
@@ -77,3 +79,13 @@ else:
     print ('Please use one of the following modes: web, archive, normal')
     exit
     
+def movefile(dstDir):
+    srcDir = ''
+    path = srcDir + '*.{}'
+    if os.path.isdir(dstDir) :
+        # Iterate over all the files in source directory
+        for filePath in glob.glob(path.format('html')):
+            # Move each file to destination Directory
+            shutil.move(filePath, dstDir)
+    else:
+        'Can not move htmls to designated folder'
