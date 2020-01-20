@@ -23,7 +23,7 @@ month = datetime.date.today().strftime("%Y-%m-%d")
 mode, directory = tryarg(sys.argv)
 
 
-if mode == 'archived':
+if mode == 'archive':
     # FEED_FORMAT is the output file type (accepts csv, json)
     # FEED_URI is the name of the output file (if no path specified, will put in same folder as where script is)
     process = CrawlerProcess({
@@ -42,7 +42,7 @@ if mode == 'archived':
         exit 
 
     prefix  = os.getcwd()
-    all_filenames = ['file:///' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
    
      
     process.crawl(CLASpider,start_urls = all_filenames)

@@ -11,16 +11,21 @@ class CLSpider(CrawlSpider):
     allowed_domains = ['vancouver.craigslist.org']
     start_urls = [
         'https://vancouver.craigslist.org/search/apa'
-        #'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
+        'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
     ]
 
     '''
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
     rules = (
-        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
+        #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
    
+
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "next")]')), follow=True, callback='archive_listings')
+   
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//ul[@class="rows"]/li[1]/a')), follow=True, callback='parse_listings')
+    
        # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
     )
 

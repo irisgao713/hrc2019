@@ -5,6 +5,7 @@ import glob
 import numpy as np
 import pandas as pd
 import re
+import os
 
 
 dst = '../results/processed/'
@@ -76,9 +77,9 @@ def process(file_name):
     for k in num_only:
         df[k]=df.apply(get_numbers,col=k,axis = 1)
 
-    #df['description'] = df.apply(clean_description,col='description',axis=1)
+    df['description'] = df.apply(clean_description,col='description',axis=1)
     df['url_in_text']= df.apply(find_url,col='description',axis=1)
-
+    
 
     def clean_symbols(row,col):
         return re.sub(r'[^\w]', ' ', str(row[col]))
@@ -87,14 +88,14 @@ def process(file_name):
         array = re.findall(r'[0-9]+', str(row[col])) 
         return array 
 
-    def clean_description(row,col)
+    def clean_description(row,col):
         s = str(row[col])
         s = re.sub('\s+', ' ', s).rstrip()
         s.replace(' QR Code Link to This Post ','')
         s = re.sub('[!@#$*+]', ' ', s)
         return s
 
-    def find_url(row,col)
+    def find_url(row,col):
         s = str(row[col])
 
         urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',s)
