@@ -14,6 +14,7 @@ from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import CLWebSpider
 from rental_crawlers.spiders.cl_listings_archived import CLASpider
 # from rental_crawlers.spiders.v_listings import VSpider
+from movefile import movefile
 
 time.sleep(random.randint(1,15)*60)
 
@@ -79,13 +80,13 @@ else:
     print ('Please use one of the following modes: web, archive, normal')
     exit
     
-def movefile(dstDir):
-    srcDir = ''
-    path = srcDir + '*.{}'
-    if os.path.isdir(dstDir) :
-        # Iterate over all the files in source directory
-        for filePath in glob.glob(path.format('html')):
-            # Move each file to destination Directory
-            shutil.move(filePath, dstDir)
-    else:
-        'Can not move htmls to designated folder'
+# def movefile(dstDir):
+#     srcDir = ''
+#     path = srcDir + '*.{}'
+#     if os.path.isdir(dstDir) :
+#         # Iterate over all the files in source directory
+#         for filePath in glob.glob(path.format('html')):
+#             # Move each file to destination Directory
+#             shutil.move(filePath, dstDir)
+#     else:
+#         'Can not move htmls to designated folder'
