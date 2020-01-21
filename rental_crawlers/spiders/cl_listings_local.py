@@ -6,7 +6,7 @@ from rental_crawlers.items import CLItem
 
 class CLLSpider(Spider):
 
-    name = 'cl_listings_archived'
+    name = 'cl_listings_local'
     
 
     # start_urls = [
@@ -18,12 +18,8 @@ class CLLSpider(Spider):
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
-        #'DELTAFETCH_ENABLED': True,
         'DELTAFETCH_ENABLED': False,
-        'SPIDER_MIDDLEWARES': {
-            #'scrapy_deltafetch.DeltaFetch': 120,
-            'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
-        },
+    
         'ITEM_PIPELINES' : {
             'rental_crawlers.pipelines.CLPipeline': 300,
         }

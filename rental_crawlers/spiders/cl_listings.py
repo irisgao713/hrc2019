@@ -39,13 +39,7 @@ class CLSpider(CrawlSpider):
         }
     }
 
-    # custom_settings = {
-    #     'LOG_LEVEL': 'DEBUG',
-        
-    #     'ITEM_PIPELINES' : {
-    #         'rental_crawlers.pipelines.CLPipeline': 300,
-    #     }
-    # }
+
 
     '''
     Callback method for parsing the response text into a CLItem. 

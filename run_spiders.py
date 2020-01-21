@@ -31,7 +31,7 @@ if mode == 'archive':
     process = CrawlerProcess({
         'USER_AGENT': default_settings.USER_AGENT,
         'FEED_FORMAT': 'csv',
-        'FEED_URI': "../results/raw/listings-" + month + ".csv"
+        'FEED_URI': "../results/parsed_raw/listings-" + month + ".csv"
     })
     
     extension = 'html'
