@@ -19,8 +19,8 @@ class CLASpider(CrawlSpider):
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
     rules = (
-        Rule(callback='parse_listings'),
-       )
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
+    )
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
