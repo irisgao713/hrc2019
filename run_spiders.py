@@ -65,7 +65,7 @@ elif mode == 'web':
     process = CrawlerProcess()
     process.crawl(CLWebSpider)
     process.start()
-    movefile(folder)
+    #movefile(folder)
 
 elif mode == 'normal':
     process = CrawlerProcess({
