@@ -12,7 +12,8 @@ from try_arg import tryarg
 #from rental_crawlers.spiders.kj_listings import KJSpider
 from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import CLWebSpider
-from rental_crawlers.spiders.cl_listings_archived import CLASpider
+#from rental_crawlers.spiders.cl_listings_archived import CLASpider
+from rental_crawlers.spiders.cl_listings_local import CLLSpider
 # from rental_crawlers.spiders.v_listings import VSpider
 from movefile import movefile
 
@@ -46,7 +47,7 @@ if mode == 'archive':
     all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
    
      
-    process.crawl(CLASpider,start_urls = all_filenames)
+    process.crawl(CLLSpider,start_urls = all_filenames)
     # process.crawl(KJSpider)
     # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
     # process.crawl(VSpider)
