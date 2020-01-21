@@ -18,15 +18,14 @@ class CLASpider(CrawlSpider):
     '''
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
-    rules = ( 
-        Rule(LinkExtractor(callback='parse_listings'),
-        
-       # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
-    )
+    rules = (
+        Rule(callback='parse_listings'),
+       )
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
         #'DELTAFETCH_ENABLED': True,
+        'DELTAFETCH_ENABLED': False,
         'SPIDER_MIDDLEWARES': {
             #'scrapy_deltafetch.DeltaFetch': 120,
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
@@ -35,7 +34,6 @@ class CLASpider(CrawlSpider):
             'rental_crawlers.pipelines.CLPipeline': 300,
         }
     }
-
     # custom_settings = {
     #     'LOG_LEVEL': 'DEBUG',
         
