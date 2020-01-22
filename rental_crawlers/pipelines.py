@@ -13,7 +13,7 @@ import re
 
 class CLPipeline(object):
     def process_item(self, item, spider):
-        if spider.name == "cl_listings":
+        if spider.name == "cl_listings" or spider.name == 'cl_listings_local':
             if not item['sqft'] is None:
                 item['sqft'] = item['sqft'].strip()
                 roomsqft = item['sqft'].split("-")

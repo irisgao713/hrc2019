@@ -70,4 +70,3 @@ class CLLSpider(Spider):
         
         yield item
 
-#terminal: scrapy crawl [name] -o [filename]
