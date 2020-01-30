@@ -28,10 +28,9 @@ class CLSpider(CrawlSpider):
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
-        #'DELTAFETCH_ENABLED': True,
-        'DELTAFETCH_ENABLED': False,
+        'DELTAFETCH_ENABLED': True,
         'SPIDER_MIDDLEWARES': {
-            #'scrapy_deltafetch.DeltaFetch': 120,
+            'scrapy_deltafetch.DeltaFetch': 120,
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
