@@ -8,7 +8,7 @@ import os
 import shutil
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
-from try_arg import tryarg
+from get_arg import getArg
 #from rental_crawlers.spiders.kj_listings import KJSpider
 from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import CLWebSpider
@@ -22,7 +22,7 @@ time.sleep(random.randint(1,15)*60)
 #Gets today's date and returns it in isoformat YYYY-MM-DD
 month = datetime.date.today().strftime("%Y-%m-%d")
 
-mode, directory = tryarg(sys.argv)
+mode, directory = getArg(sys.argv)
 
 
 if mode == 'archive':

@@ -1,7 +1,7 @@
 # include standard modules
 import getopt, sys
 
-def tryarg(fullCmdArguments):
+def getArg(fullCmdArguments):
 # read commandline arguments, first
 #fullCmdArguments = sys.argv
 
