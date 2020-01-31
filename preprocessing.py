@@ -28,7 +28,7 @@ elif directory == '':
 
 
 else:
-    print ('Please use one of the following modes: web, archive, normal')
+    print ('Please specify a file or a directory to process!')
     
 
 def getPath(fullCmdArguments):
@@ -77,7 +77,7 @@ def process(file_name):
     for k in num_only:
         df[k]=df.apply(get_numbers,col=k,axis = 1)
 
-    df['description'] = df.apply(clean_description,col='description',axis=1)
+    #df['description'] = df.apply(clean_description,col='description',axis=1)
     df['url_in_text']= df.apply(find_url,col='description',axis=1)
     
 
@@ -88,12 +88,12 @@ def process(file_name):
         array = re.findall(r'[0-9]+', str(row[col])) 
         return array 
 
-    def clean_description(row,col):
-        s = str(row[col])
-        s = re.sub('\s+', ' ', s).rstrip()
-        s.replace(' QR Code Link to This Post ','')
-        s = re.sub('[!@#$*+]', ' ', s)
-        return s
+    # def clean_description(row,col):
+    #     s = str(row[col])
+    #     s = re.sub('\s+', ' ', s).rstrip()
+    #     s.replace(' QR Code Link to This Post ','')
+    #     s = re.sub('[!@#$*+]', ' ', s)
+    #     return s
 
     def find_url(row,col):
         s = str(row[col])
