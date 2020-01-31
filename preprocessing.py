@@ -9,7 +9,7 @@ import os
 from get_arg import getPath
 
 
-dst = '../results/processed/'
+dst = 'processed/'
 extension = '.csv'
 
 file, directory = getPath(sys.argv)
@@ -77,5 +77,7 @@ def process(file_name):
         urls.extend(re.findall('www[s]?.(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',s))
         return urls       
 
+      
 
-
+    filepath = dst+'/'+filename+extension,
+    export_csv = df.to_csv (filepath, index = None, header=True)

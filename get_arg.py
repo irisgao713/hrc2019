@@ -42,8 +42,27 @@ def getPath(fullCmdArguments):
     unixOptions = "fd"
     gnuOptions = ["file=", "dir="]
 
+    # try:
+    #     arguments, values = getopt.getopt(argumentList, unixOptions, gnuOptions)
+    # except getopt.error as err:
+    #     # output error, and return with an error code
+    #     print (str(err))
+    #     sys.exit(2)
+
+    # #initiate optional arguments
+    # directory = ''
+    # file = ''
+    # # evaluate given options
+    # for currentArgument, currentValue in arguments,values:
+    #     if currentArgument in ("-f", "--file"):
+    #         print (("Pointing source file to: %s") % (currentValue))
+    #         file = str(currentValue)
+    #     elif currentArgument in ("-d", "--dir"):
+    #         print (("Pointing source directory to: %s") % (currentValue))
+    #         directory = str(currentValue)
+
     try:
-        arguments, values = getopt.getopt(argumentList, unixOptions, gnuOptions)
+        argument, value = getopt.getopt(argumentList, unixOptions, gnuOptions)
     except getopt.error as err:
         # output error, and return with an error code
         print (str(err))
@@ -53,12 +72,11 @@ def getPath(fullCmdArguments):
     directory = ''
     file = ''
     # evaluate given options
-    for currentArgument, currentValue in arguments,values:
-        if currentArgument in ("-f", "--file"):
-            print (("Pointing source file to: %s") % (currentValue))
-            file = str(currentValue)
-        elif currentArgument in ("-d", "--dir"):
-            print (("Pointing source directory to: %s") % (currentValue))
-            directory = str(currentValue)
+    if argument in ("-f", "--file"):
+            print (("Pointing source file to: %s") % (value))
+            file = str(value)
+    elif argument in ("-d", "--dir"):
+            print (("Pointing source directory to: %s") % (value))
+            directory = str(value)
 
     return file, directory
