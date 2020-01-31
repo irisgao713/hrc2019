@@ -9,12 +9,10 @@ import shutil
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from get_arg import getArg
-#from rental_crawlers.spiders.kj_listings import KJSpider
 from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import CLWebSpider
-#from rental_crawlers.spiders.cl_listings_archived import CLASpider
+from rental_crawlers.spiders.cl_listings_roo import CLROOSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
-# from rental_crawlers.spiders.v_listings import VSpider
 from movefile import movefile
 
 time.sleep(random.randint(1,15)*60)
