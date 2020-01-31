@@ -5,42 +5,39 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from rental_crawlers.items import CLItem
 
-class CLASpider(CrawlSpider):
+class CLROOSpider(CrawlSpider):
 
-    name = 'cl_listings_archived'
-    
-
-    # start_urls = [
-    #     'https://vancouver.craigslist.org/search/apa'
-    #     'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
-    # ]
+    name = 'cl_listings'
+    allowed_domains = ['vancouver.craigslist.org']
+    start_urls = [
+        'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
+    ]
 
     '''
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
     rules = (
-        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
+        #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
+        #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class ="button next"]')), follow=True, callback='parse_listings'),
+        #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "next")]')), follow=True, callback='archive_listings'),
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//ul[@class="rows"]/li[@class="result-row"]/a')), follow=True, callback='parse_listings')
+    
     )
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
-        #'DELTAFETCH_ENABLED': True,
-        'DELTAFETCH_ENABLED': False,
+        'DELTAFETCH_ENABLED': True,
         'SPIDER_MIDDLEWARES': {
-            #'scrapy_deltafetch.DeltaFetch': 120,
+            'scrapy_deltafetch.DeltaFetch': 120,
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
             'rental_crawlers.pipelines.CLPipeline': 300,
         }
     }
-    # custom_settings = {
-    #     'LOG_LEVEL': 'DEBUG',
-        
-    #     'ITEM_PIPELINES' : {
-    #         'rental_crawlers.pipelines.CLPipeline': 300,
-    #     }
-    # }
+
+
 
     '''
     Callback method for parsing the response text into a CLItem. 

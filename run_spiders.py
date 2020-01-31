@@ -77,6 +77,15 @@ elif mode == 'normal':
     process.crawl(CLSpider)
     process.start()
 
+elif mode == 'roo':
+    process = CrawlerProcess({
+        'USER_AGENT': default_settings.USER_AGENT,
+        'FEED_FORMAT': 'csv',
+        'FEED_URI': "../results/raw/TESTROO_listings-" + month + ".csv"
+    })
+    process.crawl(CLSpider)
+    process.start()
+
 else:
     print ('Please use one of the following modes: web, archive, normal')
     exit
