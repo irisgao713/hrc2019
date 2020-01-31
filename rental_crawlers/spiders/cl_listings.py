@@ -20,7 +20,7 @@ class CLSpider(CrawlSpider):
     rules = (
         #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
         #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
-        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings'),
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="button next"]')), follow=True, callback='parse_listings'),
         #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "next")]')), follow=True, callback='archive_listings'),
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//ul[@class="rows"]/li[@class="result-row"]/a')), follow=True, callback='parse_listings')
     
