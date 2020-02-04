@@ -18,7 +18,8 @@ from movefile import movefile
 time.sleep(random.randint(1,15)*60)
 
 #Gets today's date and returns it in isoformat YYYY-MM-DD
-month = datetime.date.today().strftime("%Y-%m-%d")
+date = datetime.date.today().strftime("%Y-%m-%d")``````````
+month = datetime.date.today().strftime("%Y-%m")
 
 mode, directory = getArg(sys.argv)
 
@@ -29,7 +30,7 @@ if mode == 'archive':
     process = CrawlerProcess({
         'USER_AGENT': default_settings.USER_AGENT,
         'FEED_FORMAT': 'csv',
-        'FEED_URI': "../results/parsed_raw/listings-" + month + ".csv"
+        'FEED_URI': "../results/parsed_raw/listings-" + date + ".csv"
     })
     
     extension = 'html'
@@ -53,9 +54,7 @@ if mode == 'archive':
 
 
 elif mode == 'web':
-    month = datetime.date.today().strftime("%Y-%m-%d")
-
-
+    
     folder = "../results/raw_html/" + month       
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -70,7 +69,7 @@ elif mode == 'normal':
     process = CrawlerProcess({
         'USER_AGENT': default_settings.USER_AGENT,
         'FEED_FORMAT': 'csv',
-        'FEED_URI': "../results/raw/listings-" + month + ".csv"
+        'FEED_URI': "../results/raw/"+ month +"/listings-" + date + ".csv"
     })
     process.crawl(CLSpider)
     process.start()
@@ -81,7 +80,7 @@ elif mode == 'roo':
     process = CrawlerProcess({
         'USER_AGENT': default_settings.USER_AGENT,
         'FEED_FORMAT': 'csv',
-        'FEED_URI': "../results/raw/ROO_listings-" + month + ".csv"
+        'FEED_URI': "../results/raw/ROO_listings-" + date + ".csv"
     })
     process.crawl(CLROOSpider)
     process.start()
