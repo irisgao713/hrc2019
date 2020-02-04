@@ -18,7 +18,7 @@ from movefile import movefile
 time.sleep(random.randint(1,15)*60)
 
 #Gets today's date and returns it in isoformat YYYY-MM-DD
-date = datetime.date.today().strftime("%Y-%m-%d")``````````
+date = datetime.date.today().strftime("%Y-%m-%d")
 month = datetime.date.today().strftime("%Y-%m")
 
 mode, directory = getArg(sys.argv)
