@@ -11,7 +11,7 @@ class CLSpider(CrawlSpider):
     allowed_domains = ['vancouver.craigslist.org']
     start_urls = [
         'https://vancouver.craigslist.org/search/apa'
-        #'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
+        'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
     ]
 
     '''
