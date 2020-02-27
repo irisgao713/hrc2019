@@ -7,7 +7,7 @@ import pandas as pd
 import re
 import os
 from get_arg import getPath
-filename = 'raw/listings-2019-12.csv'
+filename = 'raw/raw_csv/ROO_listings-2020-01-30.csv'
 all_files = ['raw/listings-2020-01-10.csv','raw/listings-2020-01-23.csv','raw/listings-2020-01-30.csv','raw/listings-2020-01-30-1.csv','raw/listings-2020-01-30-2.csv']
 dst = 'processed'
 extension = '.csv'
@@ -47,7 +47,10 @@ def process(file_name):
     def get_numbers(row,col): 
         array = re.findall(r'[0-9]+', str(row[col])) 
         if array:
-            return array[0]
+            ans = ''
+            for num in array:
+                ans += num
+            return ans
         else:
             return ''
 
@@ -117,7 +120,7 @@ def process(file_name):
     df = df.dropna(subset = ['title','description'])
 
     # Deduplication
-    df.drop_duplicates(subset =['date','title'], keep = 'first', inplace = True)
+    df.drop_duplicates(subset =['title'], keep = 'first', inplace = True)
 
     # Remove units and weird symbols
     for j in to_do:
