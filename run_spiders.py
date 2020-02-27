@@ -42,7 +42,7 @@ if mode == 'archive':
         #path = "../results/raw_html/" + directory +'/*.{}'
         #if not os.path.exists("../results/raw_html/" + directory):
         path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
-        if not os.path.exists("raw_html/" + ad_type + "/" + directory :
+        if not os.path.exists("raw_html/" + ad_type + "/" + directory):
             print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
             exit 
 
