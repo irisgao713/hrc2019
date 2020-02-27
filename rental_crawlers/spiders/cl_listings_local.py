@@ -70,3 +70,4 @@ class CLLSpider(Spider):
         
         yield item
 
+

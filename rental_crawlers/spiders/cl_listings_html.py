@@ -77,8 +77,8 @@ class DeltaCLWebSpider(CrawlSpider):
     To generate file name from url instead of using url as file name
     '''
     def hash_url(self,url):
-        #return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
-        return url
+        return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
+       
 
 
 
@@ -149,8 +149,8 @@ class CLWebSpider(CrawlSpider):
     To generate file name from url instead of using url as file name
     '''
     def hash_url(self,url):
-        #return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
-        return url
+        return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
+        
 
  
 
