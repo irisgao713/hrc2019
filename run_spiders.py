@@ -61,7 +61,7 @@ elif mode == 'web':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(DeltaCLWebSpider)
+    process.crawl(CLWebSpider)
     process.start()
     movefile(folder)
 
@@ -82,7 +82,7 @@ elif mode == 'roo':
         'FEED_FORMAT': 'csv',
         'FEED_URI': "../results/raw/ROO_listings-" + date + ".csv"
     })
-    process.crawl(DeltaCLROOSpider)
+    process.crawl(CLROOSpider)
     process.start()
 
 else:
