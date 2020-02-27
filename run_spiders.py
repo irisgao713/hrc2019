@@ -27,35 +27,39 @@ mode, directory = getArg(sys.argv)
 if mode == 'archive':
     # FEED_FORMAT is the output file type (accepts csv, json)
     # FEED_URI is the name of the output file (if no path specified, will put in same folder as where script is)
-    process = CrawlerProcess({
-        'USER_AGENT': default_settings.USER_AGENT,
-        'FEED_FORMAT': 'csv',
-        'FEED_URI': "../results/parsed_raw/listings-" + date + ".csv"
-    })
-    
-    extension = 'html'
-    os.chdir('../results') 
-    #path = "../results/raw_html/" + directory +'/*.{}'
-    #if not os.path.exists("../results/raw_html/" + directory):
-    path = "raw_html/" + directory +'/*.{}'
-    if not os.path.exists("raw_html/" + directory):
-        print('The directory: ' + str(directory) +' does not exist!')
-        exit 
+    for ad_type in ['apa','roo']:
 
-    prefix  = os.getcwd()
-    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
-   
-     
-    process.crawl(CLLSpider,start_urls = all_filenames)
-    # process.crawl(KJSpider)
-    # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
-    # process.crawl(VSpider)
-    process.start()
+  
+    
+        process = CrawlerProcess({
+            'USER_AGENT': default_settings.USER_AGENT,
+            'FEED_FORMAT': 'csv',
+            'FEED_URI': "../results/parsed_raw/" + ad_type + "/listings-" + date + ".csv"
+        })
+        
+        extension = 'html'
+        os.chdir('../results') 
+        #path = "../results/raw_html/" + directory +'/*.{}'
+        #if not os.path.exists("../results/raw_html/" + directory):
+        path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
+        if not os.path.exists("raw_html/" + ad_type + "/" + directory :
+            print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
+            exit 
+
+        prefix  = os.getcwd()
+        all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+    
+        
+        process.crawl(CLLSpider,start_urls = all_filenames)
+        # process.crawl(KJSpider)
+        # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
+        # process.crawl(VSpider)
+        process.start()
 
 
 elif mode == 'web':
     
-    folder = "../results/raw_html/" + month       
+    folder = "../results/raw_html/apa/" + month       
     if not os.path.exists(folder):
         os.makedirs(folder)
         #os.chdir(folder)  
@@ -64,6 +68,17 @@ elif mode == 'web':
     process.crawl(CLWebSpider)
     process.start()
     movefile(folder)
+
+    folder2 = "../results/raw_html/roo/" + month       
+    if not os.path.exists(folder2):
+        os.makedirs(folder2)
+        #os.chdir(folder)  
+
+    process = CrawlerProcess()
+    process.crawl(CLROOSpider)
+    process.start()
+    movefile(folder2)
+
 
 elif mode == 'normal':
     process = CrawlerProcess({
@@ -77,13 +92,22 @@ elif mode == 'normal':
 
 
 elif mode == 'roo':
-    process = CrawlerProcess({
-        'USER_AGENT': default_settings.USER_AGENT,
-        'FEED_FORMAT': 'csv',
-        'FEED_URI': "../results/raw/ROO_listings-" + date + ".csv"
-    })
+    # process = CrawlerProcess({
+    #     'USER_AGENT': default_settings.USER_AGENT,
+    #     'FEED_FORMAT': 'csv',
+    #     'FEED_URI': "../results/raw/ROO_listings-" + date + ".csv"
+    # })
+    # process.crawl(CLROOSpider)
+    # process.start()
+    folder2 = "../results/raw_html/roo/" + month       
+    if not os.path.exists(folder2):
+        os.makedirs(folder2)
+        #os.chdir(folder)  
+
+    process = CrawlerProcess()
     process.crawl(CLROOSpider)
     process.start()
+    movefile(folder2)
 
 else:
     print ('Please use one of the following modes: web, archive, normal')

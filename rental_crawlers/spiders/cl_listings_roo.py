@@ -4,12 +4,12 @@ import sys
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from rental_crawlers.items import CLItem
-
+import hashlib
 
 
 class DeltaCLROOSpider(CrawlSpider):
 
-    name = 'cl_listings'
+    name = 'cl_listings_roo_delta'
     allowed_domains = ['vancouver.craigslist.org']
     start_urls = [
         'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
@@ -44,47 +44,32 @@ class DeltaCLROOSpider(CrawlSpider):
     '''
     Callback method for parsing the response text into a CLItem. 
     '''
+
     def parse_listings(self, response):
-        item = CLItem()
 
-        item['title'] = response.xpath('//span[@id="titletextonly"]/text()').extract_first()
-        item['location'] = response.xpath('//small/text()').extract_first()
-        item['sqft'] = response.xpath('//span[@class="housing"]/text()').extract_first()
-        item['price'] = response.xpath('//span[@class="price"]/text()').extract_first()
-        item['date'] = response.xpath('//time/@datetime').extract_first()
-        item['lat'] = response.xpath('//div/@data-latitude').extract_first()
-        item['long'] = response.xpath('//div/@data-longitude').extract_first()
-        #item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
-        item['description'] = response.xpath('string(//section[@id="postingbody"])').extract()
+        hashed_url = self.hash_url(response.url)   
+        with open(hashed_url, 'w+') as f:
+            f.write(response.body.decode("utf-8"))
+            f.close()
         
-        item['url'] = response.url
-        item['source'] = "Craigslist"
-        item['domain'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a/text()').extract_first()
-        #NEW ITEMS
+        yield {
+            'url': hashed_url
+        }
 
-        item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
-        item['num_of_images']= len(response.xpath('//div[@class = "swipe-wrap"]/div').extract())
 
-        map_address = response.xpath('//div[@class="mapaddress"]/text()')
-        
-        t1= response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()').extract()
-        t2 = response.xpath('//p[@class = "attrgroup"]/span/text()').extract()
-        item['tags']= t1+t2
 
-        if not len(map_address) < 1:
-            item['map_address'] = map_address.extract_first()
-        
-        # if not len(tags) < 1 and not len(t2) < 1:
-            # item['tags'] = tags.extract() 
-        
-        yield item
+    '''
+    To generate file name from url instead of using url as file name
+    '''
+    def hash_url(self,url):
+        return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
 
 
 
 
 class CLROOSpider(CrawlSpider):
 
-    name = 'cl_listings'
+    name = 'cl_listings_roo'
     allowed_domains = ['vancouver.craigslist.org']
     start_urls = [
         'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
@@ -118,39 +103,59 @@ class CLROOSpider(CrawlSpider):
     '''
     Callback method for parsing the response text into a CLItem. 
     '''
+    # def parse_listings(self, response):
+    #     item = CLItem()
+
+    #     item['title'] = response.xpath('//span[@id="titletextonly"]/text()').extract_first()
+    #     item['location'] = response.xpath('//small/text()').extract_first()
+    #     item['sqft'] = response.xpath('//span[@class="housing"]/text()').extract_first()
+    #     item['price'] = response.xpath('//span[@class="price"]/text()').extract_first()
+    #     item['date'] = response.xpath('//time/@datetime').extract_first()
+    #     item['lat'] = response.xpath('//div/@data-latitude').extract_first()
+    #     item['long'] = response.xpath('//div/@data-longitude').extract_first()
+    #     #item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
+    #     item['description'] = response.xpath('string(//section[@id="postingbody"])').extract()
+        
+    #     item['url'] = response.url
+    #     item['source'] = "Craigslist"
+    #     item['domain'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a/text()').extract_first()
+    #     #NEW ITEMS
+
+    #     item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
+    #     item['num_of_images']= len(response.xpath('//div[@class = "swipe-wrap"]/div').extract())
+
+    #     map_address = response.xpath('//div[@class="mapaddress"]/text()')
+        
+    #     t1= response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()').extract()
+    #     t2 = response.xpath('//p[@class = "attrgroup"]/span/text()').extract()
+    #     item['tags']= t1+t2
+
+    #     if not len(map_address) < 1:
+    #         item['map_address'] = map_address.extract_first()
+        
+    #     # if not len(tags) < 1 and not len(t2) < 1:
+    #         # item['tags'] = tags.extract() 
+        
+    #     yield item
+
+    
     def parse_listings(self, response):
-        item = CLItem()
 
-        item['title'] = response.xpath('//span[@id="titletextonly"]/text()').extract_first()
-        item['location'] = response.xpath('//small/text()').extract_first()
-        item['sqft'] = response.xpath('//span[@class="housing"]/text()').extract_first()
-        item['price'] = response.xpath('//span[@class="price"]/text()').extract_first()
-        item['date'] = response.xpath('//time/@datetime').extract_first()
-        item['lat'] = response.xpath('//div/@data-latitude').extract_first()
-        item['long'] = response.xpath('//div/@data-longitude').extract_first()
-        #item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
-        item['description'] = response.xpath('string(//section[@id="postingbody"])').extract()
+        hashed_url = self.hash_url(response.url)   
+        with open(hashed_url, 'w+') as f:
+            f.write(response.body.decode("utf-8"))
+            f.close()
         
-        item['url'] = response.url
-        item['source'] = "Craigslist"
-        item['domain'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a/text()').extract_first()
-        #NEW ITEMS
+        yield {
+            'url': hashed_url
+        }
 
-        item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
-        item['num_of_images']= len(response.xpath('//div[@class = "swipe-wrap"]/div').extract())
 
-        map_address = response.xpath('//div[@class="mapaddress"]/text()')
-        
-        t1= response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()').extract()
-        t2 = response.xpath('//p[@class = "attrgroup"]/span/text()').extract()
-        item['tags']= t1+t2
 
-        if not len(map_address) < 1:
-            item['map_address'] = map_address.extract_first()
-        
-        # if not len(tags) < 1 and not len(t2) < 1:
-            # item['tags'] = tags.extract() 
-        
-        yield item
+    '''
+    To generate file name from url instead of using url as file name
+    '''
+    def hash_url(self,url):
+        return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
 
 #terminal: scrapy crawl [name] -o [filename]
