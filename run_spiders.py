@@ -10,8 +10,8 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from get_arg import getArg
 from rental_crawlers.spiders.cl_listings import CLSpider
-from rental_crawlers.spiders.cl_listings_html import CLWebSpider
-from rental_crawlers.spiders.cl_listings_roo import CLROOSpider
+from rental_crawlers.spiders.cl_listings_html import DeltaCLWebSpider,CLWebSpider
+from rental_crawlers.spiders.cl_listings_roo import DeltaCLROOSpider, CLROOSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 from movefile import movefile
 
@@ -61,7 +61,7 @@ elif mode == 'web':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(CLWebSpider)
+    process.crawl(DeltaCLWebSpider)
     process.start()
     movefile(folder)
 
@@ -82,7 +82,7 @@ elif mode == 'roo':
         'FEED_FORMAT': 'csv',
         'FEED_URI': "../results/raw/ROO_listings-" + date + ".csv"
     })
-    process.crawl(CLROOSpider)
+    process.crawl(DeltaCLROOSpider)
     process.start()
 
 else:
