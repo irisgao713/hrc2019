@@ -65,7 +65,7 @@ elif mode == 'web':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(CLWebSpider)
+    process.crawl(DeltaCLWebSpider)
     process.start()
     movefile(folder)
 
@@ -75,7 +75,7 @@ elif mode == 'web':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(CLROOSpider)
+    process.crawl(DeltaCLROOSpider)
     process.start()
     movefile(folder2)
 
