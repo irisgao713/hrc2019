@@ -13,3 +13,6 @@ def movefile(dstDir):
             shutil.move(filePath, dstDir)
     else:
         'Can not move htmls to designated folder'
+
+
+movefile("../results/raw_html/apa/")
