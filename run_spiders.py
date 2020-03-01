@@ -107,7 +107,7 @@ elif mode == 'roo':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(CLROOSpider)
+    process.crawl(DeltaCLROOSpider)
     process.start()
     movefile(folder2)
 
