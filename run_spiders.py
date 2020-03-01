@@ -14,6 +14,7 @@ from rental_crawlers.spiders.cl_listings_html import DeltaCLWebSpider,CLWebSpide
 from rental_crawlers.spiders.cl_listings_roo import DeltaCLROOSpider, CLROOSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 from movefile import movefile
+from twisted.internet import reactor
 
 time.sleep(random.randint(1,15)*60)
 
@@ -22,7 +23,6 @@ date = datetime.date.today().strftime("%Y-%m-%d")
 month = datetime.date.today().strftime("%Y-%m")
 
 mode, directory = getArg(sys.argv)
-
 
 if mode == 'archive':
     # FEED_FORMAT is the output file type (accepts csv, json)
@@ -55,6 +55,8 @@ if mode == 'archive':
         # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
         # process.crawl(VSpider)
         process.start()
+        process.addBoth(lambda _: reactor.stop())
+        reactor.run()
 
 
 elif mode == 'web':
@@ -75,7 +77,7 @@ elif mode == 'web':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(DeltaCLROOSpider)
+    process.crawl(CLROOSpider)
     process.start()
     movefile(folder2)
 
