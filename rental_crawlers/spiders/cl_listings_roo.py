@@ -28,7 +28,7 @@ class DeltaCLROOSpider(CrawlSpider):
     )
 
     custom_settings = {
-        'LOG_LEVEL': 'DEBUG',
+        'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': True,
         'SPIDER_MIDDLEWARES': {
             'scrapy_deltafetch.DeltaFetch': 120,
@@ -88,7 +88,7 @@ class CLROOSpider(CrawlSpider):
     )
 
     custom_settings = {
-        'LOG_LEVEL': 'DEBUG',
+        'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': False,
         'SPIDER_MIDDLEWARES': {
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
