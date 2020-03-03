@@ -1,8 +1,9 @@
-
 import glob
 import os
 import shutil
 
+
+os.chdir('../results/raw_html/roo/') 
 def movefile(dstDir):
     srcDir = ''
     path = srcDir + '*.{}'
@@ -15,4 +16,4 @@ def movefile(dstDir):
         'Can not move htmls to designated folder'
 
 
-movefile("../results/raw_html/roo/")
+movefile("2020-02")
