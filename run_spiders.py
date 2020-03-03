@@ -30,7 +30,7 @@ if mode =='archive':
     process1 = CrawlerProcess({
             'USER_AGENT': default_settings.USER_AGENT,
             'FEED_FORMAT': 'csv',
-            'FEED_URI': "../results/parsed_raw/apa/listings-" + month + ".csv"
+            'FEED_URI': "../results/parsed_raw/apa/listings-" + directory + ".csv"
         })
         
     extension = 'html'
@@ -54,7 +54,7 @@ if mode =='archive':
     process2 = CrawlerProcess({
             'USER_AGENT': default_settings.USER_AGENT,
             'FEED_FORMAT': 'csv',
-            'FEED_URI': "../results/parsed_raw/roo/listings-" + month + ".csv"
+            'FEED_URI': "../results/parsed_raw/roo/listings-" + directory + ".csv"
         })
     
     extension = 'html'
