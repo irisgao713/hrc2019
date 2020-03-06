@@ -18,10 +18,10 @@ class CLLSpider(Spider):
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
-        'DELTAFETCH_ENABLED': True,
+        #'DELTAFETCH_ENABLED': True,
     
         'ITEM_PIPELINES' : {
-            'scrapy_deltafetch.DeltaFetch': 120,
+          #  'scrapy_deltafetch.DeltaFetch': 120,
             'rental_crawlers.pipelines.CLPipeline': 300,
         }
     }
