@@ -17,7 +17,7 @@ class CLLSpider(Spider):
 
 
     custom_settings = {
-        'LOG_LEVEL': 'INFO',
+        'LOG_LEVEL': 'DEBUG',
         'DELTAFETCH_ENABLED': True,
     
         'ITEM_PIPELINES' : {
