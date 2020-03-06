@@ -5,15 +5,13 @@ import time
 import sys
 import glob
 import os
-import shutil
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
-from get_arg import getArg
+from util import getArg, movefile
 from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import DeltaCLWebSpider,CLWebSpider
 from rental_crawlers.spiders.cl_listings_roo import DeltaCLROOSpider, CLROOSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
-from movefile import movefile
 from twisted.internet import reactor
 
 time.sleep(random.randint(1,15)*60)
