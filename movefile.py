@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-os.chdir('../results/raw_html/roo') 
+os.chdir('../results/raw_html/apa') 
 def movefile(dstDir):
     srcDir = ''
     path = srcDir + '*.{}'
