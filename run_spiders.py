@@ -46,7 +46,7 @@ if mode =='archive':
     
     process1.crawl(CLLSpider,start_urls = all_filenames)
 
-
+    time.sleep(600)
 
     #### roo
     process2 = CrawlerProcess({
