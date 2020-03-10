@@ -14,7 +14,7 @@ from rental_crawlers.spiders.cl_listings_roo import DeltaCLROOSpider, CLROOSpide
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 from twisted.internet import reactor
 
-time.sleep(random.randint(1,15)*60)
+# time.sleep(random.randint(1,15)*60)
 
 #Gets today's date and returns it in isoformat YYYY-MM-DD
 date = datetime.date.today().strftime("%Y-%m-%d") 
@@ -104,7 +104,7 @@ elif mode == 'archiveOLD':
         process.start()
         # process.addBoth(lambda _: reactor.stop())
         # reactor.run()
-        time.sleep(20*60)
+        time.sleep(10*60)
 
 
 elif mode == 'web':
