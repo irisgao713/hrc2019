@@ -8,7 +8,7 @@ import os
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from util import getArg, movefile
-#from rental_crawlers.spiders.cl_listings import CLSpider
+from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import DeltaCLWebSpider,CLWebSpider
 from rental_crawlers.spiders.cl_listings_roo import DeltaCLROOSpider, CLROOSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
@@ -81,7 +81,7 @@ elif mode == 'archiveOLD':
         process = CrawlerProcess({
             'USER_AGENT': default_settings.USER_AGENT,
             'FEED_FORMAT': 'csv',
-            'FEED_URI': "../results/parsed_raw/" + ad_type + "/listings-" + date + ".csv"
+            'FEED_URI': "../results/parsed_raw/" + ad_type + "/listings-" + directory + ".csv"
         })
         
         extension = 'html'
@@ -101,9 +101,10 @@ elif mode == 'archiveOLD':
         # process.crawl(KJSpider)
         # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
         # process.crawl(VSpider)
-        # process.start()
+        process.start()
         # process.addBoth(lambda _: reactor.stop())
         # reactor.run()
+        time.sleep(20*60)
 
 
 elif mode == 'web':
@@ -148,7 +149,7 @@ elif mode == 'roo':
     # })
     # process.crawl(CLROOSpider)
     # process.start()
-    folder2 = "../results/raw_html/roo/" + month       
+    folder2 = "../results/raw_html/roo/"  + month       
     if not os.path.exists(folder2):
         os.makedirs(folder2)
         #os.chdir(folder)  
