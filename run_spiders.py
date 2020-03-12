@@ -69,6 +69,7 @@ if mode =='archive':
 
     
     process2.crawl(CLLSpider,start_urls = all_filenames)
+    process2.start()
 
 
 elif mode == 'archiveOLD':
