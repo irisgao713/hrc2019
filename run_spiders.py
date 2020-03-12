@@ -116,10 +116,12 @@ elif mode == 'web':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(DeltaCLWebSpider)
+    process.crawl(CLWebSpider)
     process.start()
     movefile(folder)
-
+    
+    time.sleep(10*60)
+        
     folder2 = "../results/raw_html/roo/" + month       
     if not os.path.exists(folder2):
         os.makedirs(folder2)
