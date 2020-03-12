@@ -24,7 +24,7 @@ tl = Timeloop()
 
 
 # Scrape HTMLs every 5 days
-@tl.job(interval=timedelta(days=1))
+@tl.job(interval=timedelta(hours=1))
 def web_mode():
     time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
@@ -78,7 +78,7 @@ def web_mode():
 #     print("10s job current time : {}".format(time.ctime()))
 
 
-@tl.job(interval=timedelta(days = 1))
+@tl.job(interval=timedelta(hours = 1))
 def archive_mode():
     
 
