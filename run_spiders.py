@@ -25,50 +25,50 @@ mode, directory = getArg(sys.argv)
 if mode =='archive':
 
     ### apa
-    process1 = CrawlerProcess({
-            'USER_AGENT': default_settings.USER_AGENT,
-            'FEED_FORMAT': 'csv',
-            'FEED_URI': "../results/parsed_raw/apa/listings-" + directory + ".csv"
-        })
-        
-    extension = 'html'
-    os.chdir('../results') 
-    #path = "../results/raw_html/" + directory +'/*.{}'
-    #if not os.path.exists("../results/raw_html/" + directory):
-    path = "raw_html/apa/" + directory +'/*.{}'
-    if not os.path.exists("raw_html/apa/" + directory):
-        print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/apa" )
-        exit 
-
-    prefix  = os.getcwd()
-    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
-
-    
-    process1.crawl(CLLSpider,start_urls = all_filenames)
-
-    # time.sleep(600)
-
-    # #### roo
-    # process2 = CrawlerProcess({
+    # process1 = CrawlerProcess({
     #         'USER_AGENT': default_settings.USER_AGENT,
     #         'FEED_FORMAT': 'csv',
-    #         'FEED_URI': "../results/parsed_raw/roo/listings-" + directory + ".csv"
+    #         'FEED_URI': "../results/parsed_raw/apa/listings-" + directory + ".csv"
     #     })
-    
+        
     # extension = 'html'
     # os.chdir('../results') 
     # #path = "../results/raw_html/" + directory +'/*.{}'
     # #if not os.path.exists("../results/raw_html/" + directory):
-    # path = "raw_html/roo/" + directory +'/*.{}'
-    # if not os.path.exists("raw_html/roo/" + directory):
-    #     print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/roo" )
+    # path = "raw_html/apa/" + directory +'/*.{}'
+    # if not os.path.exists("raw_html/apa/" + directory):
+    #     print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/apa" )
     #     exit 
 
     # prefix  = os.getcwd()
     # all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
 
     
-    # process2.crawl(CLLSpider,start_urls = all_filenames)
+    # process1.crawl(CLLSpider,start_urls = all_filenames)
+
+    #time.sleep(600)
+
+    #### roo
+    process2 = CrawlerProcess({
+            'USER_AGENT': default_settings.USER_AGENT,
+            'FEED_FORMAT': 'csv',
+            'FEED_URI': "../results/parsed_raw/roo/listings-" + directory + ".csv"
+        })
+    
+    extension = 'html'
+    os.chdir('../results') 
+    #path = "../results/raw_html/" + directory +'/*.{}'
+    #if not os.path.exists("../results/raw_html/" + directory):
+    path = "raw_html/roo/" + directory +'/*.{}'
+    if not os.path.exists("raw_html/roo/" + directory):
+        print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/roo" )
+        exit 
+
+    prefix  = os.getcwd()
+    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+
+    
+    process2.crawl(CLLSpider,start_urls = all_filenames)
 
 
 elif mode == 'archiveOLD':
