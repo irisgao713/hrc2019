@@ -155,7 +155,7 @@ def archive_mode():
             
 if __name__ == "__main__":
 
-    tl.start(block=True)
+    tl.start()
     while True:
         try:
             time.sleep(1)
