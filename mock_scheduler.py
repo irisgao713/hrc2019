@@ -1,9 +1,11 @@
-import sched, time, threading, signal
-from datetime import timedelta
-from timeloop import Timeloop
-import scrapy
-import datetime
+
+from datetime import datetime
+import os
 import random
+
+from twisted.internet import reactor
+from apscheduler.schedulers.twisted import TwistedScheduler
+
 import time
 import sys
 import glob
@@ -18,17 +20,11 @@ from rental_crawlers.spiders.cl_listings_roo import CLROOSpider, DeltaCLROOSpide
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 
 
-
-tl = Timeloop()
-
-
-# Scrape HTMLs every 5 days
-@tl.job(interval=timedelta(hours=1))
 def web_mode():
     time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
-    print(datetime.date.today().strftime("%Y-%m-%d")+": Activate web spider")
+    print(datetime.now()+ ": Activate web spider")
 
 
 
@@ -44,7 +40,7 @@ def web_mode():
 
 
     if datetime.date.today().day <= 1:
-        print("Disable deltafetch")
+        print(datetime.now()+ "Disable deltafetch")
         process = CrawlerProcess()
         process.crawl(CLWebSpider)
         process.start()
@@ -59,7 +55,7 @@ def web_mode():
 
 
     else:
-        print("Enable deltafetch")
+        print(datetime.now()+ "Enable deltafetch")
         process = CrawlerProcess()
         process.crawl(DeltaCLWebSpider)
         process.start()
@@ -71,18 +67,11 @@ def web_mode():
         movefile(folder2)
 
 
-
-# @tl.job(interval=timedelta(seconds=10))
-# def tens_job():
-#     print("10s job current time : {}".format(time.ctime()))
-
-
-@tl.job(interval=timedelta(hours = 1))
 def archive_mode():
     
 
     if datetime.date.today().day == 1:
-        print(datetime.date.today().strftime("%Y-%m-%d")+": Activate archive spider")
+        print(datetime.now()+ ": Activate archive spider")
 
 
         time.sleep(random.randint(1,15)*60)
@@ -130,35 +119,21 @@ def archive_mode():
             # process.crawl(VSpider)
             process.start()
 
-            time.sleep(15*60)
+            time.sleep(10*60)
 
 
 
+if __name__ == '__main__':
+    scheduler = TwistedScheduler()
+    scheduler.add_job(web_mode, 'interval', days = 1)
+    scheduler.add_job(archive_mode, 'interval', days = 1)
+    scheduler.start()
+    print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
-# class Job(threading.Thread):
-#     def __init__(self, interval, execute, *args, **kwargs):
-#         threading.Thread.__init__(self)
-#         self.daemon = False
-#         self.stopped = threading.Event()
-#         self.interval = interval
-#         self.execute = execute
-#         self.args = args
-#         self.kwargs = kwargs
-        
-#     def stop(self):
-#                 self.stopped.set()
-#                 self.join()
-#     def run(self):
-#             while not self.stopped.wait(self.interval.total_seconds()):
-#                 self.execute(*self.args, **self.kwargs)
-            
-if __name__ == "__main__":
-
-    tl.start()
-    while True:
-        try:
-            time.sleep(1)
-        except KeyboardInterrupt:
-            tl.stop()
-            break
-    
+    # Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
+    try:
+        reactor.run()
+    except (SystemExit):
+        pass
+    except (KeyboardInterrupt):
+        reactor.stop()
