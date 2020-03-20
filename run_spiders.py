@@ -120,14 +120,14 @@ elif mode == 'web':
     process.start()
     movefile(folder)
     
-    time.sleep(10*60)
+    
         
     folder2 = "../results/raw_html/roo/" + month       
     if not os.path.exists(folder2):
         os.makedirs(folder2)
         #os.chdir(folder)  
 
-    process = CrawlerProcess()
+    #process = CrawlerProcess()
     process.crawl(CLROOSpider)
     process.start()
     movefile(folder2)

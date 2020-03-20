@@ -20,7 +20,7 @@ from rental_crawlers.spiders.cl_listings_roo import CLROOSpider, DeltaCLROOSpide
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 
 
-def web_mode():
+def web_apa_mode():
     #time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
@@ -65,6 +65,47 @@ def web_mode():
         process.crawl(DeltaCLROOSpider)
         process.start()
         movefile(folder2)
+
+
+def web_roo():
+    #time.sleep(random.randint(1,15)*60)
+    month = datetime.date.today().strftime("%Y-%m")
+
+    print(datetime.now()+ ": Activate web spider for roo postings")
+  
+    folder2= "../results/raw_html/roo/" + month   
+   
+    if not os.path.exists(folder2):
+        os.makedirs(folder2)
+            #os.chdir(folder)  
+
+
+
+
+    if datetime.date.today().day <= 1:
+        print(datetime.now()+ "Disable deltafetch")
+
+        process = CrawlerProcess()
+        process.crawl(CLROOSpider)
+        process.start()
+        movefile(folder2)
+
+
+
+
+    else:
+        print(datetime.now()+ "Enable deltafetch")
+        process = CrawlerProcess()
+        process.crawl(DeltaCLWebSpider)
+        process.start()
+        movefile(folder)
+
+        process = CrawlerProcess()
+        process.crawl(DeltaCLROOSpider)
+        process.start()
+        movefile(folder2)
+
+
 
 
 def archive_mode():
