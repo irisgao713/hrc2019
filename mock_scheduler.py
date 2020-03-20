@@ -21,7 +21,7 @@ from rental_crawlers.spiders.cl_listings_local import CLLSpider
 
 
 def web_mode():
-    time.sleep(random.randint(1,15)*60)
+    #time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
     print(datetime.now()+ ": Activate web spider")
@@ -125,8 +125,8 @@ def archive_mode():
 
 if __name__ == '__main__':
     scheduler = TwistedScheduler()
-    scheduler.add_job(web_mode, 'interval', days = 1)
-    scheduler.add_job(archive_mode, 'interval', days = 1)
+    scheduler.add_job(web_mode, 'interval', hours = 1)
+    scheduler.add_job(archive_mode, 'interval', hours = 1)
     scheduler.start()
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
