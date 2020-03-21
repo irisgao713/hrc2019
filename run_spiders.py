@@ -22,6 +22,29 @@ month = datetime.date.today().strftime("%Y-%m")
 
 mode, directory = getArg(sys.argv)
 
+def apa():
+    folder = "../results/raw_html/apa/" + month       
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+        #os.chdir(folder)  
+
+    process = CrawlerProcess()
+    process.crawl(CLWebSpider)
+    process.start()
+    movefile(folder)
+
+def roo():
+    folder2 = "../results/raw_html/roo/" + month       
+    if not os.path.exists(folder2):
+        os.makedirs(folder2)
+        #os.chdir(folder)  
+
+    process = CrawlerProcess()
+    process.crawl(CLROOSpider)
+    process.start()
+    movefile(folder2)
+
+
 if mode =='archive':
 
     ### apa
@@ -110,27 +133,29 @@ elif mode == 'archiveOLD':
 
 elif mode == 'web':
     
-    folder = "../results/raw_html/apa/" + month       
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-        #os.chdir(folder)  
+    # folder = "../results/raw_html/apa/" + month       
+    # if not os.path.exists(folder):
+    #     os.makedirs(folder)
+    #     #os.chdir(folder)  
 
-    process = CrawlerProcess()
-    process.crawl(CLWebSpider)
-    process.start()
-    movefile(folder)
+    # process = CrawlerProcess()
+    # process.crawl(CLWebSpider)
+    # process.start()
+    # movefile(folder)
     
     
         
-    folder2 = "../results/raw_html/roo/" + month       
-    if not os.path.exists(folder2):
-        os.makedirs(folder2)
-        #os.chdir(folder)  
+    # folder2 = "../results/raw_html/roo/" + month       
+    # if not os.path.exists(folder2):
+    #     os.makedirs(folder2)
+    #     #os.chdir(folder)  
 
-    #process = CrawlerProcess()
-    process.crawl(CLROOSpider)
-    process.start()
-    movefile(folder2)
+    # process = CrawlerProcess()
+    # process.crawl(CLROOSpider)
+    # process.start()
+    # movefile(folder2)
+    apa
+    roo
 
 
 elif mode == 'normal':
