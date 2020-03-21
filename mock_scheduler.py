@@ -1,5 +1,5 @@
 
-from datetime import datetime
+import datetime
 import os
 import random
 
@@ -20,58 +20,43 @@ from rental_crawlers.spiders.cl_listings_roo import CLROOSpider, DeltaCLROOSpide
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 
 
-def web_apa_mode():
+def web_apa():
     #time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
-    print(datetime.now()+ ": Activate web spider")
+    print(datetime.datetime.now()+ ": Activate web spider")
 
 
 
     folder = "../results/raw_html/apa/" + month    
-    folder2= "../results/raw_html/roo/" + month   
-    if not os.path.exists(folder):
+     if not os.path.exists(folder):
         os.makedirs(folder)
-    elif not os.path.exists(folder2):
-        os.makedirs(folder2)
-            #os.chdir(folder)  
 
 
 
 
     if datetime.date.today().day <= 1:
-        print(datetime.now()+ "Disable deltafetch")
+        print(datetime.datetime.now()+ "Disable deltafetch")
         process = CrawlerProcess()
         process.crawl(CLWebSpider)
         process.start()
         movefile(folder)
 
-        process = CrawlerProcess()
-        process.crawl(CLROOSpider)
-        process.start()
-        movefile(folder2)
-
-
 
 
     else:
-        print(datetime.now()+ "Enable deltafetch")
+        print(datetime.datetime.now()+ "Enable deltafetch")
         process = CrawlerProcess()
         process.crawl(DeltaCLWebSpider)
         process.start()
         movefile(folder)
-
-        process = CrawlerProcess()
-        process.crawl(DeltaCLROOSpider)
-        process.start()
-        movefile(folder2)
 
 
 def web_roo():
     #time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
-    print(datetime.now()+ ": Activate web spider for roo postings")
+    print(datetime.datetime.now()+ ": Activate web spider for roo postings")
   
     folder2= "../results/raw_html/roo/" + month   
    
@@ -83,7 +68,7 @@ def web_roo():
 
 
     if datetime.date.today().day <= 1:
-        print(datetime.now()+ "Disable deltafetch")
+        print(datetime.datetime.now()+ "Disable deltafetch")
 
         process = CrawlerProcess()
         process.crawl(CLROOSpider)
@@ -94,11 +79,8 @@ def web_roo():
 
 
     else:
-        print(datetime.now()+ "Enable deltafetch")
-        process = CrawlerProcess()
-        process.crawl(DeltaCLWebSpider)
-        process.start()
-        movefile(folder)
+        print(datetime.datetime.now()+ "Enable deltafetch")
+        
 
         process = CrawlerProcess()
         process.crawl(DeltaCLROOSpider)
@@ -112,7 +94,7 @@ def archive_mode():
     
 
     if datetime.date.today().day == 1:
-        print(datetime.now()+ ": Activate archive spider")
+        print(datetime.datetime.now()+ ": Activate archive spider")
 
 
         time.sleep(random.randint(1,15)*60)
@@ -166,7 +148,8 @@ def archive_mode():
 
 if __name__ == '__main__':
     scheduler = TwistedScheduler()
-    scheduler.add_job(web_mode, 'interval', hours = 1)
+    scheduler.add_job(web_apa, 'interval', minutes = 15)
+    scheduler.add_job(web_roo,'interval',minutes = 15)
     scheduler.add_job(archive_mode, 'interval', hours = 1)
     scheduler.start()
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
