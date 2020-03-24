@@ -153,12 +153,13 @@ if __name__ == '__main__':
     # scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
     process = CrawlerProcess()
-    scheduler.add_job(process.crawl, 'cron', args =[CLWebSpider],day_of_week='mon-fri', hour=16, minute=10)
-    scheduler.add_job(process.crawl,'cron', args=[CLROOSpider],day_of_week='mon-fri', hour=16, minute=30)
+    scheduler.add_job(process.crawl, 'cron', args =[CLWebSpider],day_of_week='mon-fri', hour=16, minute=32)
+    scheduler.add_job(process.crawl,'cron', args=[CLROOSpider],day_of_week='mon-fri', hour=16, minute=45)
     
     #scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
     scheduler.start()
+    process.start(False)
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
 
