@@ -5,6 +5,7 @@ import random
 
 from twisted.internet import reactor
 from apscheduler.schedulers.twisted import TwistedScheduler
+from apscheduler.scheduler import Scheduler
 
 import time
 import sys
@@ -147,10 +148,11 @@ def archive_mode():
 
 
 if __name__ == '__main__':
-    scheduler = TwistedScheduler()
+    #scheduler = TwistedScheduler()
     # scheduler.add_job(web_apa, 'interval', minutes =30)
     # scheduler.add_job(web_roo,'interval',minutes = 30)
     # scheduler.add_job(archive_mode, 'interval', minutes = 40)
+    scheduler = Scheduler()
     scheduler.add_cron_job(web_apa, day_of_week='mon-fri', hour=13, minute=30)
     scheduler.add_cron_job(web_roo, day_of_week='mon-fri', hour=14, minute=00)
     scheduler.add_cron_job(archive_mode, day_of_week='mon-fri', hour=14, minute=30)
