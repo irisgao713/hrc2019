@@ -39,7 +39,7 @@ def web_apa():
         print(str(datetime.datetime.now())+ ": Disable deltafetch")
         process = CrawlerProcess()
         process.crawl(CLWebSpider)
-        process.start()
+        process.start(False)
         movefile(folder)
 
 
@@ -48,7 +48,7 @@ def web_apa():
         print(str(datetime.datetime.now())+ ": Enable deltafetch")
         process = CrawlerProcess()
         process.crawl(DeltaCLWebSpider)
-        process.start()
+        process.start(False)
         movefile(folder)
 
 
@@ -72,7 +72,7 @@ def web_roo():
 
         process = CrawlerProcess()
         process.crawl(CLROOSpider)
-        process.start()
+        process.start(False)
         movefile(folder2)
 
 
@@ -84,7 +84,7 @@ def web_roo():
 
         process = CrawlerProcess()
         process.crawl(DeltaCLROOSpider)
-        process.start()
+        process.start(False)
         movefile(folder2)
 
 
@@ -148,18 +148,17 @@ def archive_mode():
 
 if __name__ == '__main__':
     scheduler = TwistedScheduler()
-    process = CrawlerProcess()
     # scheduler.add_job(web_apa, 'cron',day_of_week='mon-fri', hour=15, minute=30)
     # scheduler.add_job(web_roo,'cron', day_of_week='mon-fri', hour=16, minute=00)
     # scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
-    scheduler.add_job(process.crawl(CLWebSpider), 'cron',day_of_week='mon-fri', hour=16, minute=10)
-    scheduler.add_job(process.crawl(CLROOSpider),'cron', day_of_week='mon-fri', hour=16, minute=30)
+    process = CrawlerProcess()
+    scheduler.add_job(process.crawl, 'cron', args =[CLWebSpider],day_of_week='mon-fri', hour=16, minute=10)
+    scheduler.add_job(process.crawl,'cron', args=[CLROOSpider],day_of_week='mon-fri', hour=16, minute=30)
     
     #scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
     scheduler.start()
-    process.start(False)
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
 
