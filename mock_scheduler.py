@@ -45,7 +45,7 @@ def web_apa():
 
 
     else:
-        print(str(datetime.datetime.now())+ "Enable deltafetch")
+        print(str(datetime.datetime.now())+ ": Enable deltafetch")
         process = CrawlerProcess()
         process.crawl(DeltaCLWebSpider)
         process.start()
@@ -148,14 +148,22 @@ def archive_mode():
 
 if __name__ == '__main__':
     scheduler = TwistedScheduler()
-    # scheduler.add_job(web_apa, 'interval', minutes =30)
-    # scheduler.add_job(web_roo,'interval',minutes = 30)
-    # scheduler.add_job(archive_mode, 'interval', minutes = 40)
-    scheduler.add_job(web_apa, 'cron',day_of_week='mon-fri', hour=15, minute=30)
-    scheduler.add_job(web_roo,'cron', day_of_week='mon-fri', hour=16, minute=00)
-    scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
+    process = CrawlerProcess()
+    # scheduler.add_job(web_apa, 'cron',day_of_week='mon-fri', hour=15, minute=30)
+    # scheduler.add_job(web_roo,'cron', day_of_week='mon-fri', hour=16, minute=00)
+    # scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
+    
+    scheduler.add_job(process.crawl(CLWebSpider), 'cron',day_of_week='mon-fri', hour=16, minute=10)
+    scheduler.add_job(process.crawl(CLROOSpider),'cron', day_of_week='mon-fri', hour=16, minute=30)
+    
+    #scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
+    
     scheduler.start()
+    process.start(False)
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+
+
+
 
     # Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
     try:
