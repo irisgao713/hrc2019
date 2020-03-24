@@ -24,7 +24,7 @@ def web_apa():
     #time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
-    print(str(datetime.datetime.now()) + ": Activate web spider")
+    print(str(datetime.datetime.now()) + ": Activate web spider for apa postings")
 
 
 
@@ -36,7 +36,7 @@ def web_apa():
 
 
     if datetime.date.today().day <= 1:
-        print(str(datetime.datetime.now())+ "Disable deltafetch")
+        print(str(datetime.datetime.now())+ ": Disable deltafetch")
         process = CrawlerProcess()
         process.crawl(CLWebSpider)
         process.start()
@@ -68,7 +68,7 @@ def web_roo():
 
 
     if datetime.date.today().day <= 1:
-        print(str(datetime.datetime.now())+ "Disable deltafetch")
+        print(str(datetime.datetime.now())+ ": Disable deltafetch")
 
         process = CrawlerProcess()
         process.crawl(CLROOSpider)
@@ -79,7 +79,7 @@ def web_roo():
 
 
     else:
-        print(str(datetime.datetime.now())+ "Enable deltafetch")
+        print(str(datetime.datetime.now())+ ": Enable deltafetch")
         
 
         process = CrawlerProcess()
