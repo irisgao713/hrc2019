@@ -24,7 +24,7 @@ def web_apa():
     #time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
-    print(datetime.datetime.now()+ ": Activate web spider")
+    print(str(datetime.datetime.now()) + ": Activate web spider")
 
 
 
@@ -36,7 +36,7 @@ def web_apa():
 
 
     if datetime.date.today().day <= 1:
-        print(datetime.datetime.now()+ "Disable deltafetch")
+        print(str(datetime.datetime.now())+ "Disable deltafetch")
         process = CrawlerProcess()
         process.crawl(CLWebSpider)
         process.start()
@@ -45,7 +45,7 @@ def web_apa():
 
 
     else:
-        print(datetime.datetime.now()+ "Enable deltafetch")
+        print(str(datetime.datetime.now())+ "Enable deltafetch")
         process = CrawlerProcess()
         process.crawl(DeltaCLWebSpider)
         process.start()
@@ -56,7 +56,7 @@ def web_roo():
     #time.sleep(random.randint(1,15)*60)
     month = datetime.date.today().strftime("%Y-%m")
 
-    print(datetime.datetime.now()+ ": Activate web spider for roo postings")
+    print(str(datetime.datetime.now())+ ": Activate web spider for roo postings")
   
     folder2= "../results/raw_html/roo/" + month   
    
@@ -68,7 +68,7 @@ def web_roo():
 
 
     if datetime.date.today().day <= 1:
-        print(datetime.datetime.now()+ "Disable deltafetch")
+        print(str(datetime.datetime.now())+ "Disable deltafetch")
 
         process = CrawlerProcess()
         process.crawl(CLROOSpider)
@@ -79,7 +79,7 @@ def web_roo():
 
 
     else:
-        print(datetime.datetime.now()+ "Enable deltafetch")
+        print(str(datetime.datetime.now())+ "Enable deltafetch")
         
 
         process = CrawlerProcess()
@@ -94,7 +94,7 @@ def archive_mode():
     
 
     if datetime.date.today().day == 1:
-        print(datetime.datetime.now()+ ": Activate archive spider")
+        print(str(datetime.datetime.now())+ ": Activate archive spider")
 
 
         time.sleep(random.randint(1,15)*60)
