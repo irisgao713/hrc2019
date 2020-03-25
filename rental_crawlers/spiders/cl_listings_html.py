@@ -16,11 +16,8 @@ class DeltaCLWebSpider(CrawlSpider):
     allowed_domains = ['vancouver.craigslist.org']
     start_urls = [
         'https://vancouver.craigslist.org/search/apa'
-        #'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
-    ]
-    #rooms for rent 'https://vancouver.craigslist.ca/rds/roo/' 
-    #apartments 'https://vancouver.craigslist.ca/search/rds/apa'
-    '''
+         ]
+   '''
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
     rules = (
@@ -62,7 +59,7 @@ class DeltaCLWebSpider(CrawlSpider):
 
     def parse_listings(self, response):
 
-        hashed_url = self.hash_url(response.url)   
+        hashed_url = '../results/raw_html/apa/'+ datetime.date.today().strftime("%Y-%m")+'/'+ self.hash_url(response.url)   
         with open(hashed_url, 'w+') as f:
             f.write(response.body.decode("utf-8"))
             f.close()
@@ -134,8 +131,8 @@ class CLWebSpider(CrawlSpider):
 
     def parse_listings(self, response):
 
-        hashed_url = self.hash_url(response.url)   
-        with open(hashed_url, 'w+') as f:
+        hashed_url = '../results/raw_html/apa/'+ datetime.date.today().strftime("%Y-%m")+'/'+ self.hash_url(response.url)   
+         with open(hashed_url, 'w+') as f:
             f.write(response.body.decode("utf-8"))
             f.close()
         
