@@ -5,6 +5,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from rental_crawlers.items import CLItem
 import hashlib
+import datetime
 
 
 class DeltaCLROOSpider(CrawlSpider):
