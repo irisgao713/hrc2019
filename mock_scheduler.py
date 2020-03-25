@@ -147,21 +147,24 @@ def archive_mode():
 
 
 if __name__ == '__main__':
+    print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+
     scheduler = TwistedScheduler()
     # scheduler.add_job(web_apa, 'cron',day_of_week='mon-fri', hour=15, minute=30)
     # scheduler.add_job(web_roo,'cron', day_of_week='mon-fri', hour=16, minute=00)
     # scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
-    process = CrawlerProcess()
-    scheduler.add_job(process.crawl, 'cron', args =[ApaSpider],day_of_week='mon-fri', hour=10, minute=32)
-    scheduler.add_job(process.crawl,'cron', args=[ROOSpider],day_of_week='mon-fri', hour=16, minute=0)
-    
-    #scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
+    # process = CrawlerProcess()
+    # scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=10, minute=30)
+    # scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=16, minute=0)
+    # scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day='2-last', hour=10, minute=30)
+    # scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day='2-last', hour=16, minute=0)
+
+    scheduler.add_job(archive_mode, 'cron', day ='25', hour=15, minute=35)
     
     scheduler.start()
-    process.start(False)
-    print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
-
+    #process.start(False)
+   
 
 
 
