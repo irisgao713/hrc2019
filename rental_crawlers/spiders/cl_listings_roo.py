@@ -80,10 +80,7 @@ class CLROOSpider(CrawlSpider):
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
     rules = (
-        #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class="result-title hdrlnk"]')), follow=True, callback='parse_listings'),
-        #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "button next")]')), follow=True, callback='parse_listings')
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[@class ="button next"]')), follow=True, callback='parse_listings'),
-        #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "next")]')), follow=True, callback='archive_listings'),
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//ul[@class="rows"]/li[@class="result-row"]/a')), follow=True, callback='parse_listings')
     
     )
@@ -91,6 +88,7 @@ class CLROOSpider(CrawlSpider):
     custom_settings = {
         'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': False,
+        'DELTAFETCH_RESET':True,
         'SPIDER_MIDDLEWARES': {
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },

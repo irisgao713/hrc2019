@@ -105,6 +105,7 @@ class CLWebSpider(CrawlSpider):
     custom_settings = {
         'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': False,
+        'DELTAFETCH_RESET':True,
         'SPIDER_MIDDLEWARES': {
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
