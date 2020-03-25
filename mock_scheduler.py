@@ -103,11 +103,11 @@ def archive_mode():
     #Find the folder from last month
     month = date.today().month 
     if month == 1:
-        directory = str(date.today().year-1) + '-12' 
+        directory = str(datetime.date.today().year-1) + '-12' 
     elif month < 10:
-        directory = str(date.today().year) + '-0' + str(month-1)
+        directory = str(datetime.date.today().year) + '-0' + str(month-1)
     else:
-        directory = str(date.today().year) + '-' + str(month-1)
+        directory = str(datetime.date.today().year) + '-' + str(month-1)
         
     
 
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day_of_week = 'mon - sun', hour=10, minute=30)
     scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day_of_week = 'mon - sun',  hour=16, minute=0)
 
-    scheduler.add_job(archive_mode, 'cron', day ='25', hour=15, minute=45)
+    scheduler.add_job(archive_mode, 'cron', day ='25', hour=16, minute=5)
     
     scheduler.start()
     process.start(False)
