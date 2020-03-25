@@ -154,24 +154,24 @@ if __name__ == '__main__':
     # scheduler.add_job(web_roo,'cron', day_of_week='mon-fri', hour=16, minute=00)
     # scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
-    # process = CrawlerProcess()
-    # scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=10, minute=30)
-    # scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=16, minute=0)
-    # scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day='2-last', hour=10, minute=30)
-    # scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day='2-last', hour=16, minute=0)
+    process = CrawlerProcess()
+    scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=10, minute=30)
+    scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=16, minute=0)
+    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day='2-last', hour=10, minute=30)
+    scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day='2-last', hour=16, minute=0)
 
-    scheduler.add_job(archive_mode, 'cron', day ='25', hour=15, minute=35)
+    scheduler.add_job(archive_mode, 'cron', day ='25', hour=15, minute=38)
     
     scheduler.start()
-    #process.start(False)
+    process.start(False)
    
 
 
 
     # Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
-    try:
-        reactor.run()
-    except (SystemExit):
-        pass
-    except (KeyboardInterrupt):
-        reactor.stop()
+    # try:
+    #     reactor.run()
+    # except (SystemExit):
+    #     pass
+    # except (KeyboardInterrupt):
+    #     reactor.stop()
