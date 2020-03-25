@@ -17,7 +17,8 @@ class DeltaCLWebSpider(CrawlSpider):
     start_urls = [
         'https://vancouver.craigslist.org/search/apa'
          ]
-   '''
+         
+    '''
     Rules for automatically following the links to the listing, and going to the next listing. 
     '''
     rules = (
