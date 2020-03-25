@@ -47,7 +47,7 @@ class DeltaCLROOSpider(CrawlSpider):
 
     def parse_listings(self, response):
 
-        hashed_url = self.hash_url(response.url)   
+        hashed_url = '../results/raw_html/roo/'+ datetime.date.today().strftime("%Y-%m")+'/'+ self.hash_url(response.url)   
         with open(hashed_url, 'w+') as f:
             f.write(response.body.decode("utf-8"))
             f.close()
@@ -141,7 +141,7 @@ class CLROOSpider(CrawlSpider):
     
     def parse_listings(self, response):
 
-        hashed_url = self.hash_url(response.url)   
+        hashed_url = '../results/raw_html/roo/'+ datetime.date.today().strftime("%Y-%m")+'/'+ self.hash_url(response.url)   
         with open(hashed_url, 'w+') as f:
             f.write(response.body.decode("utf-8"))
             f.close()
