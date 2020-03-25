@@ -14,9 +14,9 @@ import shutil
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from util import getArg, movefile
-from rental_crawlers.spiders.cl_listings import CLSpider
-from rental_crawlers.spiders.cl_listings_html import CLWebSpider, DeltaCLWebSpider
-from rental_crawlers.spiders.cl_listings_roo import CLROOSpider, DeltaCLROOSpider
+#from rental_crawlers.spiders.cl_listings import CLSpider
+from rental_crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
+from rental_crawlers.spiders.cl_listings_roo import ROOSpider, DeltaROOSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 
 
@@ -153,8 +153,8 @@ if __name__ == '__main__':
     # scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
     process = CrawlerProcess()
-    scheduler.add_job(process.crawl, 'cron', args =[CLWebSpider],day_of_week='mon-fri', hour=16, minute=32)
-    scheduler.add_job(process.crawl,'cron', args=[CLROOSpider],day_of_week='mon-fri', hour=16, minute=45)
+    scheduler.add_job(process.crawl, 'cron', args =[ApaSpider],day_of_week='mon-fri', hour=10, minute=32)
+    scheduler.add_job(process.crawl,'cron', args=[ROOSpider],day_of_week='mon-fri', hour=16, minute=0)
     
     #scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     

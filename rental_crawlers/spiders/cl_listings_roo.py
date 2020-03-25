@@ -8,7 +8,7 @@ import hashlib
 import datetime
 
 
-class DeltaCLROOSpider(CrawlSpider):
+class DeltaROOSpider(CrawlSpider):
 
     name = 'cl_listings_roo_delta'
     allowed_domains = ['vancouver.craigslist.org']
@@ -68,7 +68,7 @@ class DeltaCLROOSpider(CrawlSpider):
 
 
 
-class CLROOSpider(CrawlSpider):
+class ROOSpider(CrawlSpider):
 
     name = 'cl_listings_roo'
     allowed_domains = ['vancouver.craigslist.org']

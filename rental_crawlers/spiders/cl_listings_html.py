@@ -10,7 +10,7 @@ import datetime
 
 
 
-class DeltaCLWebSpider(CrawlSpider):
+class DeltaApaSpider(CrawlSpider):
 
     name = 'cl_listings_html'
     allowed_domains = ['vancouver.craigslist.org']
@@ -81,7 +81,7 @@ class DeltaCLWebSpider(CrawlSpider):
 
 
 
-class CLWebSpider(CrawlSpider):
+class ApaSpider(CrawlSpider):
 
     name = 'cl_listings_html'
     allowed_domains = ['vancouver.craigslist.org']
