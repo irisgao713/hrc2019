@@ -175,11 +175,11 @@ if __name__ == '__main__':
 
     process1 = ArchiveProcess('apa')
     process2 = ArchiveProcess('roo')
-    scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], day ='26', hour=16, minute=20)
+    scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], day ='26', hour=16, minute=20)
     
     scheduler.start()
     #process.start(False)
-    process1.start(False)
+    process2.start(False)
    
 
 
