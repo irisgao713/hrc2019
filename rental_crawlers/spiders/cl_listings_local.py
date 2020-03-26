@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import sys
+import sys, os
 from scrapy.spiders import Spider
 from rental_crawlers.items import CLItem
+import datetime
 
 class CLLSpider(Spider):
 
@@ -14,7 +15,7 @@ class CLLSpider(Spider):
     #     'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
     # ]
 
-
+    start_urls = getFiles('apa')
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
@@ -71,4 +72,29 @@ class CLLSpider(Spider):
         
         yield item
 
+
+    def getFiles(self,ad_type):
+
+        #Find the folder from last month
+        month = datetime.date.today().month 
+        if month == 1:
+            directory = str(datetime.date.today().year) + '-12' 
+        elif month < 10:
+            directory = str(datetime.date.today().year) + '-0' + str(month)
+        else:
+            directory = str(datetime.date.today().year) + '-' + str(month)
+            
+
+        extension = 'html'
+        os.chdir('../results') 
+        #path = "../results/raw_html/" + directory +'/*.{}'
+        #if not os.path.exists("../results/raw_html/" + directory):
+        path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
+        if not os.path.exists("raw_html/" + ad_type + "/" + directory):
+            print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
+            exit 
+
+        prefix  = os.getcwd()
+        all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+        return all_filenames
 

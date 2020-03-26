@@ -143,31 +143,6 @@ def archive_mode():
         time.sleep(10*60)
 
 
-def getFiles(ad_type):
-
-    #Find the folder from last month
-    month = datetime.date.today().month 
-    if month == 1:
-        directory = str(datetime.date.today().year-1) + '-12' 
-    elif month < 10:
-        directory = str(datetime.date.today().year) + '-0' + str(month-1)
-    else:
-        directory = str(datetime.date.today().year) + '-' + str(month-1)
-        
-
-    extension = 'html'
-    os.chdir('../results') 
-    #path = "../results/raw_html/" + directory +'/*.{}'
-    #if not os.path.exists("../results/raw_html/" + directory):
-    path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
-    if not os.path.exists("raw_html/" + ad_type + "/" + directory):
-        print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
-        exit 
-
-    prefix  = os.getcwd()
-    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
-    return all_filenames
-
 
 
 
@@ -200,7 +175,7 @@ if __name__ == '__main__':
 
     process1 = ArchiveProcess('apa')
     process2 = ArchiveProcess('roo')
-    scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider, start_urls = getFiles('apa')], day ='26', hour=16, minute=00)
+    scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], day ='26', hour=16, minute=15)
     
     scheduler.start()
     process.start(False)
