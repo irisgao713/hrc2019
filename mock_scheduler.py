@@ -143,6 +143,46 @@ def archive_mode():
         time.sleep(10*60)
 
 
+def getFiles(ad_type):
+
+    #Find the folder from last month
+    month = datetime.date.today().month 
+    if month == 1:
+        directory = str(datetime.date.today().year-1) + '-12' 
+    elif month < 10:
+        directory = str(datetime.date.today().year) + '-0' + str(month-1)
+    else:
+        directory = str(datetime.date.today().year) + '-' + str(month-1)
+        
+
+    extension = 'html'
+    os.chdir('../results') 
+    #path = "../results/raw_html/" + directory +'/*.{}'
+    #if not os.path.exists("../results/raw_html/" + directory):
+    path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
+    if not os.path.exists("raw_html/" + ad_type + "/" + directory):
+        print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
+        exit 
+
+    prefix  = os.getcwd()
+    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+    return all_filenames
+
+
+
+
+def ArchiveProcess(ad_type):
+    date = datetime.date.today().strftime("%Y-%m-%d") 
+    process = CrawlerProcess({
+            'USER_AGENT': default_settings.USER_AGENT,
+            'FEED_FORMAT': 'csv',
+            'FEED_URI': "../results/parsed_raw/" + ad_type + "/listings-" + date + ".csv"
+        })
+    return process
+        
+
+
+
 
 if __name__ == '__main__':
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
@@ -152,16 +192,19 @@ if __name__ == '__main__':
     # scheduler.add_job(web_roo,'cron', day_of_week='mon-fri', hour=16, minute=00)
     # scheduler.add_job(archive_mode, 'cron',day_of_week='mon-fri', hour=16, minute=30)
     
-    process = CrawlerProcess()
-    scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=8, minute=30)
-    scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=8, minute=0)
-    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day_of_week = 'mon - sun', hour=10, minute=30)
-    scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day_of_week = 'mon - sun',  hour=16, minute=0)
+    # process = CrawlerProcess()
+    # scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=8, minute=30)
+    # scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=8, minute=0)
+    # scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day_of_week = 'mon - sun', hour=10, minute=30)
+    # scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day_of_week = 'mon - sun',  hour=16, minute=0)
 
-    scheduler.add_job(archive_mode, 'cron', day ='25', hour=16, minute=40)
+    process1 = ArchiveProcess('apa')
+    process2 = ArchiveProcess('roo')
+    scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider, start_urls = getFiles('apa')], day ='26', hour=16, minute=00)
     
     scheduler.start()
     process.start(False)
+    process1.start(False)
    
 
 
