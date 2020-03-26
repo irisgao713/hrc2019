@@ -14,8 +14,29 @@ class CLLSpider(Spider):
     #     'https://vancouver.craigslist.org/search/apa'
     #     'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
     # ]
+    month = datetime.date.today().month 
+    if month == 1:
+        directory = str(datetime.date.today().year) + '-12' 
+    elif month < 10:
+        directory = str(datetime.date.today().year) + '-0' + str(month)
+    else:
+        directory = str(datetime.date.today().year) + '-' + str(month)
+        
 
-    start_urls = self.getFiles('apa')
+    extension = 'html'
+    os.chdir('../results') 
+    #path = "../results/raw_html/" + directory +'/*.{}'
+    #if not os.path.exists("../results/raw_html/" + directory):
+    path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
+    if not os.path.exists("raw_html/" + ad_type + "/" + directory):
+        print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
+        exit 
+
+    prefix  = os.getcwd()
+    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+    
+
+    start_urls = all_filenames
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
