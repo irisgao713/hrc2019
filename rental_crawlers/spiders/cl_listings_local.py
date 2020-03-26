@@ -14,6 +14,7 @@ class CLLSpider(Spider):
     #     'https://vancouver.craigslist.org/search/apa'
     #     'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
     # ]
+    ad_type = 'roo'
     month = datetime.date.today().month 
     if month == 1:
         directory = str(datetime.date.today().year) + '-12' 
