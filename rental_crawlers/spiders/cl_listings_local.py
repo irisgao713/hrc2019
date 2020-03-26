@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import sys, os
+import sys, os, glob
 from scrapy.spiders import Spider
 from rental_crawlers.items import CLItem
 import datetime
@@ -15,7 +15,7 @@ class CLLSpider(Spider):
     #     'https://vancouver.craigslist.org/d/rooms-shares/search/roo'
     # ]
 
-    start_urls = getFiles('apa')
+    start_urls = self.getFiles('apa')
 
     custom_settings = {
         'LOG_LEVEL': 'DEBUG',
