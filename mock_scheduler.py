@@ -178,7 +178,7 @@ if __name__ == '__main__':
     scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], day ='26', hour=16, minute=15)
     
     scheduler.start()
-    process.start(False)
+    #process.start(False)
     process1.start(False)
    
 
