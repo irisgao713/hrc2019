@@ -34,7 +34,7 @@ class CLLSpider(Spider):
         exit 
 
     prefix  = os.getcwd()
-    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+    all_filenames = ['file://' + os.getcwd() + '/' + i for i in glob.glob(path.format(extension))]
     
 
     start_urls = all_filenames
