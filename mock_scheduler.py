@@ -147,11 +147,11 @@ def archive_mode():
 
 
 def ArchiveProcess(ad_type):
-    date = datetime.date.today().strftime("%Y-%m") 
+    month = datetime.date.today().strftime("%Y-%m") 
     process = CrawlerProcess({
             'USER_AGENT': default_settings.USER_AGENT,
             'FEED_FORMAT': 'csv',
-            'FEED_URI': "../results/parsed_raw/" + ad_type + "/listings-" + date + ".csv"
+            'FEED_URI': "../results/parsed_raw/" + ad_type + "/listings-" + month + ".csv"
         })
     return process
         
