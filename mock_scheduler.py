@@ -147,7 +147,7 @@ def archive_mode():
 
 
 def ArchiveProcess(ad_type):
-    date = datetime.date.today().strftime("%Y-%m-%d") 
+    date = datetime.date.today().strftime("%Y-%m") 
     process = CrawlerProcess({
             'USER_AGENT': default_settings.USER_AGENT,
             'FEED_FORMAT': 'csv',
@@ -155,6 +155,29 @@ def ArchiveProcess(ad_type):
         })
     return process
         
+
+def getFiles(ad_type):
+    month = datetime.date.today().month 
+    if month == 1:
+        directory = str(datetime.date.today().year) + '-12' 
+    elif month < 10:
+        directory = str(datetime.date.today().year) + '-0' + str(month)
+    else:
+        directory = str(datetime.date.today().year) + '-' + str(month)
+        
+
+    extension = 'html'
+    os.chdir('../results') 
+    #path = "../results/raw_html/" + directory +'/*.{}'
+    #if not os.path.exists("../results/raw_html/" + directory):
+    path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
+    if not os.path.exists("raw_html/" + ad_type + "/" + directory):
+        print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
+        exit 
+
+    prefix  = os.getcwd()
+    all_filenames = ['file://' + os.getcwd() + '/' + i for i in glob.glob(path.format(extension))]
+    return all_filenames
 
 
 
@@ -175,7 +198,7 @@ if __name__ == '__main__':
 
     process1 = ArchiveProcess('apa')
     process2 = ArchiveProcess('roo')
-    scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], day ='26', hour=16, minute=20)
+    scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day ='29', hour=13, minute=15)
     
     scheduler.start()
     #process.start(False)
