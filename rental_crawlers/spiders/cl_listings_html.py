@@ -145,6 +145,8 @@ class ApaSpider(CrawlSpider):
 
 
 
+
+
     '''
     To generate file name from url instead of using url as file name
     '''
