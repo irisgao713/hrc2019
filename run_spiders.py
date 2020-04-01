@@ -117,9 +117,8 @@ elif mode == 'web':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(CLWebSpider)
+    process.crawl(ApaSpider)
     process.start()
-    movefile(folder)
     
     
         
@@ -159,9 +158,8 @@ elif mode == 'roo':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(DeltaCLROOSpider)
+    process.crawl(ROOSpider)
     process.start()
-    movefile(folder2)
 
 else:
     print ('Please use one of the following modes: web, archive, normal')
