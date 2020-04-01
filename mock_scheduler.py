@@ -83,10 +83,10 @@ if __name__ == '__main__':
 
 
 
-    # Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
-    # try:
-    #     reactor.run()
-    # except (SystemExit):
-    #     pass
-    # except (KeyboardInterrupt):
-    #     reactor.stop()
+    Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
+    try:
+        reactor.run()
+    except (SystemExit):
+        pass
+    except (KeyboardInterrupt):
+        reactor.stop()
