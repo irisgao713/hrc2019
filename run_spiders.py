@@ -7,14 +7,14 @@ import glob
 import os
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
-from util import getArg, movefile
+from util import getArg
 from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
 from rental_crawlers.spiders.cl_listings_roo import ROOSpider, DeltaROOSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 from twisted.internet import reactor
 
-# time.sleep(random.randint(1,15)*60)
+
 
 #Gets today's date and returns it in isoformat YYYY-MM-DD
 date = datetime.date.today().strftime("%Y-%m-%d") 
@@ -22,32 +22,30 @@ month = datetime.date.today().strftime("%Y-%m")
 
 mode, directory = getArg(sys.argv)
 
-
-if mode =='archive':
-
-    ### apa
-    # process1 = CrawlerProcess({
-    #         'USER_AGENT': default_settings.USER_AGENT,
-    #         'FEED_FORMAT': 'csv',
-    #         'FEED_URI': "../results/parsed_raw/apa/listings-" + directory + ".csv"
-    #     })
+if mode == 'archive_apa':
+    ## apa
+    process1 = CrawlerProcess({
+            'USER_AGENT': default_settings.USER_AGENT,
+            'FEED_FORMAT': 'csv',
+            'FEED_URI': "../results/parsed_raw/apa/listings-" + directory + ".csv"
+        })
         
-    # extension = 'html'
-    # os.chdir('../results') 
-    # #path = "../results/raw_html/" + directory +'/*.{}'
-    # #if not os.path.exists("../results/raw_html/" + directory):
-    # path = "raw_html/apa/" + directory +'/*.{}'
-    # if not os.path.exists("raw_html/apa/" + directory):
-    #     print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/apa" )
-    #     exit 
+    extension = 'html'
+    os.chdir('../results') 
+    #path = "../results/raw_html/" + directory +'/*.{}'
+    #if not os.path.exists("../results/raw_html/" + directory):
+    path = "raw_html/apa/" + directory +'/*.{}'
+    if not os.path.exists("raw_html/apa/" + directory):
+        print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/apa" )
+        exit 
 
-    # prefix  = os.getcwd()
-    # all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
+    prefix  = os.getcwd()
+    all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
 
     
-    # process1.crawl(CLLSpider,start_urls = all_filenames)
+    process1.crawl(CLLSpider,start_urls = all_filenames)
 
-    #time.sleep(600)
+elif mode =='archive_roo':
 
     #### roo
     process2 = CrawlerProcess({
@@ -73,43 +71,8 @@ if mode =='archive':
     process2.start()
 
 
-elif mode == 'archiveOLD':
-    # FEED_FORMAT is the output file type (accepts csv, json)
-    # FEED_URI is the name of the output file (if no path specified, will put in same folder as where script is)
-    for ad_type in ['apa','roo']:
 
-  
-    
-        process = CrawlerProcess({
-            'USER_AGENT': default_settings.USER_AGENT,
-            'FEED_FORMAT': 'csv',
-            'FEED_URI': "../results/parsed_raw/" + ad_type + "/listings-" + directory + ".csv"
-        })
-        
-        extension = 'html'
-        os.chdir('../results') 
-        #path = "../results/raw_html/" + directory +'/*.{}'
-        #if not os.path.exists("../results/raw_html/" + directory):
-        path = "raw_html/" + ad_type + "/" + directory +'/*.{}'
-        if not os.path.exists("raw_html/" + ad_type + "/" + directory):
-            print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
-            exit 
-
-        prefix  = os.getcwd()
-        all_filenames = ['file://' + prefix + '/' + i for i in glob.glob(path.format(extension))]
-    
-        
-        process.crawl(CLLSpider,start_urls = all_filenames)
-        # process.crawl(KJSpider)
-        # Need Splash running for VSpider: docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
-        # process.crawl(VSpider)
-        process.start()
-        # process.addBoth(lambda _: reactor.stop())
-        # reactor.run()
-        time.sleep(10*60)
-
-
-elif mode == 'web':
+elif mode == 'apa':
     
     folder = "../results/raw_html/apa/" + month       
     if not os.path.exists(folder):
@@ -164,14 +127,3 @@ elif mode == 'roo':
 else:
     print ('Please use one of the following modes: web, archive, normal')
     exit
-    
-# def movefile(dstDir):
-#     srcDir = ''
-#     path = srcDir + '*.{}'
-#     if os.path.isdir(dstDir) :
-#         # Iterate over all the files in source directory
-#         for filePath in glob.glob(path.format('html')):
-#             # Move each file to destination Directory
-#             shutil.move(filePath, dstDir)
-#     else:
-#         'Can not move htmls to designated folder'
