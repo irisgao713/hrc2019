@@ -70,15 +70,15 @@ if __name__ == '__main__':
     scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=16, minute=20)
     scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day= '2/1',  hour=16, minute=25)
 
-    # process1 = ArchiveProcess('apa')
-    # process2 = ArchiveProcess('roo')
-    # scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('apa')}, day = '2', hour=19, minute=15)
-    # scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day = '2', hour=20, minute=15)
+    process1 = ArchiveProcess('apa')
+    process2 = ArchiveProcess('roo')
+    scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('apa')}, day = '2', hour=17, minute=00)
+    scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day = '2', hour=17, minute=15)
     
     scheduler.start()
     process.start()
-    #process1.start(False)
-    #process2.start(False)
+    process1.start()
+    process2.start()
    
 
 
