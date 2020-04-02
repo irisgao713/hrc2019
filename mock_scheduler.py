@@ -67,7 +67,7 @@ if __name__ == '__main__':
     process = CrawlerProcess()
     scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=8, minute=30)
     scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=8, minute=0)
-    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=10, minute=30)
+    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=15, minute=30)
     scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day= '2/1',  hour=16, minute=0)
 
     process1 = ArchiveProcess('apa')
