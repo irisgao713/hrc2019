@@ -80,20 +80,11 @@ elif mode == 'apa':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(ApaSpider)
+    process.crawl(DeltaApaSpider)
     process.start()
     
     
         
-    # folder2 = "../results/raw_html/roo/" + month       
-    # if not os.path.exists(folder2):
-    #     os.makedirs(folder2)
-    #     #os.chdir(folder)  
-
-    # process = CrawlerProcess()
-    # process.crawl(CLROOSpider)
-    # process.start()
-    # movefile(folder2)
 
 
 elif mode == 'normal':
