@@ -67,26 +67,26 @@ if __name__ == '__main__':
     process = CrawlerProcess()
     scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=8, minute=30)
     scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=8, minute=0)
-    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=15, minute=30)
-    scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day= '2/1',  hour=16, minute=0)
+    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=16, minute=20)
+    scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day= '2/1',  hour=16, minute=25)
 
-    process1 = ArchiveProcess('apa')
-    process2 = ArchiveProcess('roo')
-    scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('apa')}, day = '2', hour=19, minute=15)
-    scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day = '2', hour=20, minute=15)
+    # process1 = ArchiveProcess('apa')
+    # process2 = ArchiveProcess('roo')
+    # scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('apa')}, day = '2', hour=19, minute=15)
+    # scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day = '2', hour=20, minute=15)
     
     scheduler.start()
-    process.start(False)
-    process1.start(False)
-    process2.start(False)
+    process.start()
+    #process1.start(False)
+    #process2.start(False)
    
 
 
 
-    #Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
-    # try:
-    #     reactor.run()
-    # except (SystemExit):
-    #     pass
-    # except (KeyboardInterrupt):
-    #     reactor.stop()
+    Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
+    try:
+        reactor.run()
+    except (SystemExit):
+        pass
+    except (KeyboardInterrupt):
+        reactor.stop()
