@@ -16,7 +16,7 @@ from scrapy.settings import default_settings
 from util import getArg, movefile
 #from rental_crawlers.spiders.cl_listings import CLSpider
 from rental_crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
-from rental_crawlers.spiders.cl_listings_roo import ROOSpider, DeltaROOSpider
+from rental_crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
 from rental_crawlers.spiders.cl_listings_local import CLLSpider
 
 
@@ -66,9 +66,9 @@ if __name__ == '__main__':
 
     process = CrawlerProcess()
     scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=8, minute=30)
-    scheduler.add_job(process.crawl,'cron', args=[ROOSpider], day='1', hour=8, minute=0)
+    scheduler.add_job(process.crawl,'cron', args=[RooSpider], day='1', hour=8, minute=0)
     scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=16, minute=20)
-    scheduler.add_job(process.crawl,'cron', args=[DeltaROOSpider], day= '2/1',  hour=16, minute=25)
+    scheduler.add_job(process.crawl,'cron', args=[DeltaRooSpider], day= '2/1',  hour=16, minute=25)
 
     process1 = ArchiveProcess('apa')
     process2 = ArchiveProcess('roo')
