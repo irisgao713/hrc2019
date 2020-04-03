@@ -42,20 +42,8 @@ class DeltaApaSpider(CrawlSpider):
     }
 
     '''
-    Callback method for parsing the response text into a CLItem. 
+    Callback method for parsing the response text into an HTML file 
     '''
-    # def archive_listings(self, res):
-    #     month = datetime.date.today().strftime("%Y-%m-%d")
-
-    #     folder = "../results/raw_html/" + month 
-    #     # if not os.path.exists(folder):
-    #     #     os.mkdir(folder)
-
-    #     path = folder + "/" + self.hash_url(res.url)
-        
-    #     with open(path, 'w+') as f:
-    #         f.write(res.body)
-    #         f.close
 
 
     def parse_listings(self, response):
@@ -115,21 +103,8 @@ class ApaSpider(CrawlSpider):
     }
 
     '''
-    Callback method for parsing the response text into a CLItem. 
+    Callback method for parsing the response text into an HTML file. 
     '''
-    # def archive_listings(self, res):
-    #     month = datetime.date.today().strftime("%Y-%m-%d")
-
-    #     folder = "../results/raw_html/" + month 
-    #     # if not os.path.exists(folder):
-    #     #     os.mkdir(folder)
-
-    #     path = folder + "/" + self.hash_url(res.url)
-        
-    #     with open(path, 'w+') as f:
-    #         f.write(res.body)
-    #         f.close
-
 
     def parse_listings(self, response):
 

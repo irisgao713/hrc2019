@@ -2,7 +2,7 @@
 import scrapy
 import sys, os, glob
 from scrapy.spiders import Spider
-from rental_crawlers.items import CLItem
+from crawlers.items import CLItem
 import datetime
 
 class CLLSpider(Spider):
