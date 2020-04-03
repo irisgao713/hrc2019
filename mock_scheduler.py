@@ -2,7 +2,7 @@
 import datetime
 import os
 import random
-
+import logging
 from twisted.internet import reactor
 from apscheduler.schedulers.twisted import TwistedScheduler
 
@@ -13,10 +13,12 @@ import os
 import shutil
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
-from util import getArg
-from rental_crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
-from rental_crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
-from rental_crawlers.spiders.cl_listings_local import CLLSpider
+from util.util import getArg
+from util.logger import set_params
+from util.root import from_root
+from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
+from crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
+from crawlers.spiders.cl_listings_local import CLLSpider
 
 
 
@@ -61,6 +63,9 @@ def getFiles(ad_type):
 if __name__ == '__main__':
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
+    logger = logging.getLogger(__name__)
+    set_params(logger, from_root("log\\scheduler.log"))
+
     scheduler = TwistedScheduler()
 
     process = CrawlerProcess()
@@ -85,7 +90,11 @@ if __name__ == '__main__':
     #Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
     try:
         reactor.run()
+  
     except (SystemExit):
         pass
+    except (Exception):
+        logger.exception("Scheduler: Fatal Error")
     except (KeyboardInterrupt):
         reactor.stop()
+        print("Finish executing script.")
