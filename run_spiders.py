@@ -10,7 +10,7 @@ from scrapy.settings import default_settings
 from util.util import getArg
 from crawlers.spiders.cl_listings import CLSpider
 from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
-from crawlers.spiders.cl_listings_roo import ROOSpider, DeltaROOSpider
+from crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
 from crawlers.spiders.cl_listings_local import CLLSpider
 from twisted.internet import reactor
 
@@ -112,7 +112,7 @@ elif mode == 'roo':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(DeltaROOSpider)
+    process.crawl(DeltaRooSpider)
     process.start()
 
 else:
