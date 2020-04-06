@@ -3,7 +3,7 @@ import scrapy
 import sys
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-from rental_crawlers.items import CLItem
+from crawlers.items import CLItem
 
 class DeltaCLSpider(CrawlSpider):
 
