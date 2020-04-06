@@ -70,8 +70,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'rental_crawlers.pipelines.CLPipeline': 300,
-    'rental_crawlers.pipelines.KJPipeline': 400
+    'crawlers.pipelines.CLPipeline': 300,
+    'crawlers.pipelines.KJPipeline': 400
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
