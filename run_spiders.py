@@ -7,11 +7,11 @@ import glob
 import os
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
-from util import getArg
-from rental_crawlers.spiders.cl_listings import CLSpider
-from rental_crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
-from rental_crawlers.spiders.cl_listings_roo import ROOSpider, DeltaROOSpider
-from rental_crawlers.spiders.cl_listings_local import CLLSpider
+from util.util import getArg
+from crawlers.spiders.cl_listings import CLSpider
+from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
+from crawlers.spiders.cl_listings_roo import ROOSpider, DeltaROOSpider
+from crawlers.spiders.cl_listings_local import CLLSpider
 from twisted.internet import reactor
 
 
