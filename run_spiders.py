@@ -1,6 +1,5 @@
 import scrapy
 import datetime
-import random
 import time
 import sys
 import glob
@@ -56,8 +55,6 @@ elif mode =='archive_roo':
     
     extension = 'html'
     os.chdir('../results') 
-    #path = "../results/raw_html/" + directory +'/*.{}'
-    #if not os.path.exists("../results/raw_html/" + directory):
     path = "raw_html/roo/" + directory +'/*.{}'
     if not os.path.exists("raw_html/roo/" + directory):
         print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/roo" )
@@ -99,13 +96,7 @@ elif mode == 'normal':
 
 
 elif mode == 'roo':
-    # process = CrawlerProcess({
-    #     'USER_AGENT': default_settings.USER_AGENT,
-    #     'FEED_FORMAT': 'csv',
-    #     'FEED_URI': "../results/raw/ROO_listings-" + date + ".csv"
-    # })
-    # process.crawl(CLROOSpider)
-    # process.start()
+
     folder2 = "../results/raw_html/roo/"  + month       
     if not os.path.exists(folder2):
         os.makedirs(folder2)
