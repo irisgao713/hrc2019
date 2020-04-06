@@ -112,7 +112,7 @@ elif mode == 'roo':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(ROOSpider)
+    process.crawl(DeltaROOSpider)
     process.start()
 
 else:
