@@ -28,6 +28,13 @@ class DeltaRooSpider(CrawlSpider):
     
     )
 
+    '''
+    Settings for spider:
+    1. Log level is set to information. When more details needed set LOG_LEVEL = DEBUG
+    2. Enable scrapy deltafetch and add to middlewares
+    3. Specify pipeline for all spiders, although for this spider it does nothing
+    '''
+
     custom_settings = {
         'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': True,
@@ -43,7 +50,7 @@ class DeltaRooSpider(CrawlSpider):
 
 
     '''
-    Callback method for parsing the response text into a CLItem. 
+    Callback method for parsing the response text into an HTML file. 
     '''
 
     def parse_listings(self, response):
@@ -60,7 +67,7 @@ class DeltaRooSpider(CrawlSpider):
 
 
     '''
-    To generate file name from url instead of using url as file name
+    To generate hashed file name from url 
     '''
     def hash_url(self,url):
         return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'
@@ -85,6 +92,12 @@ class RooSpider(CrawlSpider):
     
     )
 
+    '''
+    Settings for spider:
+    1. Log level is set to information. When more details needed set LOG_LEVEL = DEBUG
+    2. Disable scrapy deltafetch and reset status for the new month
+    3. Specify pipeline for all spiders, although for this spider it does nothing
+    '''
     custom_settings = {
         'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': False,
@@ -100,42 +113,8 @@ class RooSpider(CrawlSpider):
 
 
     '''
-    Callback method for parsing the response text into a CLItem. 
+    Callback method for parsing the response text into an HTML file. 
     '''
-    # def parse_listings(self, response):
-    #     item = CLItem()
-
-    #     item['title'] = response.xpath('//span[@id="titletextonly"]/text()').extract_first()
-    #     item['location'] = response.xpath('//small/text()').extract_first()
-    #     item['sqft'] = response.xpath('//span[@class="housing"]/text()').extract_first()
-    #     item['price'] = response.xpath('//span[@class="price"]/text()').extract_first()
-    #     item['date'] = response.xpath('//time/@datetime').extract_first()
-    #     item['lat'] = response.xpath('//div/@data-latitude').extract_first()
-    #     item['long'] = response.xpath('//div/@data-longitude').extract_first()
-    #     #item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
-    #     item['description'] = response.xpath('string(//section[@id="postingbody"])').extract()
-        
-    #     item['url'] = response.url
-    #     item['source'] = "Craigslist"
-    #     item['domain'] = response.xpath('//section/header[1]/nav/ul/li[2]/p/a/text()').extract_first()
-    #     #NEW ITEMS
-
-    #     item['location_accuracy'] = response.xpath('//div/@data-accuracy').extract_first()
-    #     item['num_of_images']= len(response.xpath('//div[@class = "swipe-wrap"]/div').extract())
-
-    #     map_address = response.xpath('//div[@class="mapaddress"]/text()')
-        
-    #     t1= response.xpath('//p[@class = "attrgroup"]/span[@class = "shared-line-bubble"]/b/text()').extract()
-    #     t2 = response.xpath('//p[@class = "attrgroup"]/span/text()').extract()
-    #     item['tags']= t1+t2
-
-    #     if not len(map_address) < 1:
-    #         item['map_address'] = map_address.extract_first()
-        
-    #     # if not len(tags) < 1 and not len(t2) < 1:
-    #         # item['tags'] = tags.extract() 
-        
-    #     yield item
 
     
     def parse_listings(self, response):
@@ -152,7 +131,7 @@ class RooSpider(CrawlSpider):
 
 
     '''
-    To generate file name from url instead of using url as file name
+    To generate hashed file name from url 
     '''
     def hash_url(self,url):
         return hashlib.sha224(str(url).encode('utf-8')).hexdigest()+'.html'

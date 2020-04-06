@@ -10,24 +10,20 @@ class CLLSpider(Spider):
     name = 'cl_listings_local'
     
 
-
+    '''
+    Settings for spider:
+    1. Log level is set to information. When more details needed set LOG_LEVEL = DEBUG
+    2. Specify pipeline for all spiders, for this spider the pipeline performs some preprocessing for selected fields
+    '''
 
     custom_settings = {
-        'LOG_LEVEL': 'DEBUG',
-        #'DELTAFETCH_ENABLED': True,
-    
+        'LOG_LEVEL': 'INFO',
+
         'ITEM_PIPELINES' : {
-          #  'scrapy_deltafetch.DeltaFetch': 120,
             'crawlers.pipelines.CLPipeline': 300,
         }
     }
-    # custom_settings = {
-    #     'LOG_LEVEL': 'DEBUG',
-        
-    #     'ITEM_PIPELINES' : {
-    #         'rental_crawlers.pipelines.CLPipeline': 300,
-    #     }
-    # }
+
 
     '''
     Callback method for parsing the response text into a CLItem. 
@@ -42,7 +38,6 @@ class CLLSpider(Spider):
         item['date'] = response.xpath('//time/@datetime').extract_first()
         item['lat'] = response.xpath('//div/@data-latitude').extract_first()
         item['long'] = response.xpath('//div/@data-longitude').extract_first()
-        #item['description'] = response.xpath('//section[@id="postingbody"]/text()').extract_first()
         item['description'] = response.xpath('string(//section[@id="postingbody"])').extract()
         
         item['url'] = response.url

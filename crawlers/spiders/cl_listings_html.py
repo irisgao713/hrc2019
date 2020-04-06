@@ -4,7 +4,6 @@ import sys
 import os
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-#from rental_crawlers.items import CLItem
 import hashlib
 import datetime
 
@@ -28,6 +27,14 @@ class DeltaApaSpider(CrawlSpider):
         #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "next")]')), follow=True, callback='archive_listings'),
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//ul[@class="rows"]/li[@class="result-row"]/a')), follow=True, callback='parse_listings')
     )
+    
+    '''
+    Settings for spider:
+    1. Log level is set to information. When more details needed set LOG_LEVEL = DEBUG
+    2. Enable scrapy deltafetch and add to middlewares
+    3. Specify pipeline for all spiders, although for this spider it does nothing
+    '''
+
 
     custom_settings = {
         'LOG_LEVEL': 'INFO',
@@ -89,6 +96,14 @@ class ApaSpider(CrawlSpider):
         #Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[contains(@class, "next")]')), follow=True, callback='archive_listings'),
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//ul[@class="rows"]/li[@class="result-row"]/a')), follow=True, callback='parse_listings')
     )
+
+    
+    '''
+    Settings for spider:
+    1. Log level is set to information. When more details needed set LOG_LEVEL = DEBUG
+    2. Disable scrapy deltafetch and reset status for the new month
+    3. Specify pipeline for all spiders, although for this spider it does nothing
+    '''
 
     custom_settings = {
         'LOG_LEVEL': 'INFO',
