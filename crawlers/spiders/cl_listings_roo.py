@@ -36,7 +36,7 @@ class DeltaRooSpider(CrawlSpider):
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
-            'rental_crawlers.pipelines.CLPipeline': 300,
+            'crawlers.pipelines.CLPipeline': 300,
         }
     }
 
@@ -93,7 +93,7 @@ class RooSpider(CrawlSpider):
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
-            'rental_crawlers.pipelines.CLPipeline': 300,
+            'crawlers.pipelines.CLPipeline': 300,
         }
     }
 

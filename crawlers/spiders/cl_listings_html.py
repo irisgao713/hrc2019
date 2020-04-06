@@ -37,7 +37,7 @@ class DeltaApaSpider(CrawlSpider):
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
-            'rental_crawlers.pipelines.CLPipeline': 300,
+            'crawlers.pipelines.CLPipeline': 300,
         }
     }
 
@@ -98,7 +98,7 @@ class ApaSpider(CrawlSpider):
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
         'ITEM_PIPELINES' : {
-            'rental_crawlers.pipelines.CLPipeline': 300,
+            'crawlers.pipelines.CLPipeline': 300,
         }
     }
 
