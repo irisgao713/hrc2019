@@ -7,7 +7,7 @@ import pandas as pd
 import re
 import os
 from get_arg import getPath
-filename = 'raw/raw_csv/ROO_listings-2020-01-30.csv'
+filename = 'raw/istings-2020-03.csv'
 all_files = ['raw/listings-2020-01-10.csv','raw/listings-2020-01-23.csv','raw/listings-2020-01-30.csv','raw/listings-2020-01-30-1.csv','raw/listings-2020-01-30-2.csv']
 dst = 'processed'
 extension = '.csv'
