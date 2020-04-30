@@ -55,7 +55,7 @@ def process(file_name):
 
     df = pd.read_csv(file_name)
     #new_df =df[np.isnan(df.lat)&np.isnan(df.long)]
-    new_df = df[np.isinan(df.sqft)]
+    new_df = df[np.isnan(df.sqft)]
      
     saved_to = os.path.splitext(os.path.basename(filename))[0]
     #prefix  = os.getcwd()
