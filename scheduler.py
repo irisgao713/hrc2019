@@ -105,7 +105,7 @@ if __name__ == '__main__':
 
     ## On every second day of the month, scrape archived HTML from the previous month into a .csv file
     scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('apa')}, day = '2', hour=17, minute=rand_min())
-    scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day = '2', hour=17, minute=1rand_min())
+    scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day = '2', hour=17, minute=rand_min())
     
     scheduler.start()
     process.start()
