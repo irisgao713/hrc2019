@@ -54,7 +54,7 @@ def process(file_name):
 
 
     df = pd.read_csv(file_name)
-    new_df =df[df.lat =='' & df.long =='']
+    new_df =df[np.isnan(df.lat)&np.isnan(df.long)]
 
      
     saved_to = os.path.splitext(os.path.basename(filename))[0]
