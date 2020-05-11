@@ -13,11 +13,11 @@ import os
 import shutil
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
-from util.util import getArg
+from util.util import *
 from util.logger import set_params
 from util.root import from_root
 from util.email import notify
-from util.healthcheck import  
+from util.healthcheck import check_rows
 from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
 from crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
 from crawlers.spiders.cl_listings_local import CLLSpider
@@ -55,15 +55,9 @@ def getFiles(ad_type):
         
         :return: all_filenames: a list of html file paths in the folder specified by 'ad_type' and current month
     '''  
-    month = datetime.date.today().month 
-    if month == 1:
-        directory = str(datetime.date.today().year) + '-12' 
-    elif month < 10:
-        directory = str(datetime.date.today().year) + '-0' + str(month)
-    else:
-        directory = str(datetime.date.today().year) + '-' + str(month)
+    
         
-
+    directory = last_month()
    
     extension = 'html'
     os.chdir('../results') 
@@ -109,7 +103,8 @@ if __name__ == '__main__':
     ## On every second day of the month, scrape archived HTML from the previous month into a .csv file
     scheduler.add_job(process1.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('apa')}, day = '2', hour=17, minute=rand_min())
     scheduler.add_job(process2.crawl, 'cron', args=[CLLSpider], kwargs = {"start_urls" :getFiles('roo')}, day = '2', hour=17, minute=rand_min())
-    
+    scheduler.add_job(check_rows,args=["listings-" + last_month() + ".csv"], day = '2', hour=18, minute=rand_min())
+
     scheduler.start()
     process.start()
     process1.start()
