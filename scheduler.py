@@ -16,6 +16,8 @@ from scrapy.settings import default_settings
 from util.util import getArg
 from util.logger import set_params
 from util.root import from_root
+from util.email import notify
+from util.healthcheck import  
 from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
 from crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
 from crawlers.spiders.cl_listings_local import CLLSpider
@@ -49,7 +51,8 @@ def getFiles(ad_type):
 
     For example, if the current month is April 2020, and ad_type = 'apa', then the function will return all HTML paths in: '../results/raw_html/apa/2020-03'.
 
-        : param ad_type: determines the path of the folder to look for HTML files. Only accepts either 'apa' or 'roo'.
+        :param ad_type: determines the path of the folder to look for HTML files. Only accepts either 'apa' or 'roo'.
+        
         :return: all_filenames: a list of html file paths in the folder specified by 'ad_type' and current month
     '''  
     month = datetime.date.today().month 
@@ -123,6 +126,7 @@ if __name__ == '__main__':
         pass
     except (Exception):
         logger.exception("Scheduler: Fatal Error")
+        notify("forcequit")
     except (KeyboardInterrupt):
         reactor.stop()
         print("Finish executing script.")
