@@ -3,6 +3,7 @@ import getopt, sys
 import glob
 import os
 import shutil
+import datetime
 
 def getArg(fullCmdArguments):
 # read commandline arguments, first
@@ -86,8 +87,9 @@ def getPath(fullCmdArguments):
 
 
 def movefile(dstDir):
-    ## move HTML files to the right monthly folder
-
+    '''
+     move HTML files to the right monthly folder
+    '''
 
     srcDir = ''
     path = srcDir + '*.{}'
@@ -100,3 +102,17 @@ def movefile(dstDir):
     else:
         'Can not move htmls to designated folder'
 
+
+def last_month():
+    '''
+    Return the previous month in the format of YYYY-MM
+    '''
+    month = datetime.date.today().month 
+    if month == 1:
+        ll = str(datetime.date.today().year) + '-12' 
+    elif month < 10:
+        ll = str(datetime.date.today().year) + '-0' + str(month)
+    else:
+        ll = str(datetime.date.today().year) + '-' + str(month)
+
+    return ll 
