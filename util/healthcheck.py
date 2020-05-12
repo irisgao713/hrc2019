@@ -6,7 +6,7 @@ def check_rows(filename):
     Check if the CSV file contains more than 100 rows
     '''
 
-    fold = "../results/parsed_raw/"
+    fold = "../../results/parsed_raw/"
 
     apa = pd.read_csv(fold + "apa/" + filename)
     roo = pd.read_csv(fold + "roo/" + filename)
