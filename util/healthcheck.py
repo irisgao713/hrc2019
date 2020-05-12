@@ -1,5 +1,5 @@
 import pandas as pd
-from email import notify
+from report import notify
 
 def check_rows(filename):
     '''
