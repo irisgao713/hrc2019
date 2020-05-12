@@ -8,6 +8,7 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from util import last_month
 import datetime
 
 def notify(issue):
@@ -60,7 +61,7 @@ def body_text(issue):
     if issue == "forcequit":
         body = "(This e-mail is automaticlly generated from the virtual machine: sysadmin@hrc.scarp.ubc.ca) The Craiglist scraper has been interrupted unexpectedly. To restart the scraper, Please follow the instructions attached."
     elif issue == "contamination":
-        body = "(This e-mail is automaticlly generated from the virtual machine: sysadmin@hrc.scarp.ubc.ca) The Craiglist data collected during " + datetime.date.today().month + " seems to have been contaminated since the total number of listings was lower than 100."
+        body = "(This e-mail is automaticlly generated from the virtual machine: sysadmin@hrc.scarp.ubc.ca) The Craiglist data collected during " + last_month() + " seems to have been contaminated since the total number of listings was lower than 100."
     else:
         body = "There is an error with the Craiglist scraper"
 
