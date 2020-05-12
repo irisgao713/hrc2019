@@ -110,9 +110,9 @@ def last_month():
     month = datetime.date.today().month 
     if month == 1:
         ll = str(datetime.date.today().year) + '-12' 
-    elif month < 10:
-        ll = str(datetime.date.today().year) + '-0' + str(month)
+    elif month < 11:
+        ll = str(datetime.date.today().year) + '-0' + str(month-1)
     else:
-        ll = str(datetime.date.today().year) + '-' + str(month)
+        ll = str(datetime.date.today().year) + '-' + str(month-1)
 
     return ll 
