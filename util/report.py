@@ -56,6 +56,7 @@ def notify(issue):
     text = email.as_string()
     session.sendmail(sender_email, receiver_email, text)
     session.quit()
+    print("A notification of the error issue has been sent")
     
 
 
