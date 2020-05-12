@@ -26,20 +26,29 @@ def notify(issue):
     receiver_email = "scraperinfosender@yahoo.com"
     file = "automate_report.pdf" # in the same directory as script
     password = "svoaptqjbjzghbmy"
+
+
     # Create the email head (sender, receiver, and subject)
     email = MIMEMultipart()
     email["From"] = sender_email
     email["To"] = receiver_email 
     email["Subject"] = subject
-    # Add body and attachment to email
+
+
+    ## Add body and attachment to email
     email.attach(MIMEText(body, "plain"))
-    attach_file = open(file, "rb") # open the file
-    report = MIMEBase("application", "octate-stream")
-    report.set_payload((attach_file).read())
-    encoders.encode_base64(report)
-    #add report header with the file name
-    report.add_header("Content-Decomposition", "attachment", filename = file)
-    email.attach(report)
+    # attach_file = open(file, "rb") # open the file
+    # report = MIMEBase("application", "octate-stream")
+    # report.set_payload((attach_file).read())
+    # encoders.encode_base64(report)
+
+
+    ##add report header with the file name
+    #report.add_header("Content-Decomposition", "attachment", filename = file)
+    #email.attach(report)
+
+
+
     #Create SMTP session for sending the mail
     session = smtplib.SMTP("smtp.mail.yahoo.com",587) #use gmail with port
     session.starttls() #enable security
