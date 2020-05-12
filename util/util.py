@@ -4,7 +4,7 @@ import glob
 import os
 import shutil
 import datetime
-
+import random
 def getArg(fullCmdArguments):
 # read commandline arguments, first
 #fullCmdArguments = sys.argv
@@ -116,3 +116,10 @@ def last_month():
         ll = str(datetime.date.today().year) + '-' + str(month-1)
 
     return ll 
+
+
+def rand_min():
+    '''
+    Return a random number between 0 and 60
+    '''
+    return random.randint(0,60)
