@@ -24,7 +24,7 @@ def notify(issue):
 
     sender_email = "scraperinfosender@yahoo.com"
     receiver_email = "scraperinfosender@yahoo.com"
-    file = "attachment/instructions.pdf" 
+    file = "attachments/instructions.pdf" 
     password = "svoaptqjbjzghbmy"
 
 
