@@ -24,7 +24,7 @@ def notify(issue):
 
     sender_email = "scraperinfosender@yahoo.com"
     receiver_email = "scraperinfosender@yahoo.com"
-    file = "automate_report.pdf" # in the same directory as script
+    file = "attachment/instructions.pdf" 
     password = "svoaptqjbjzghbmy"
 
 
@@ -35,17 +35,17 @@ def notify(issue):
     email["Subject"] = subject
 
 
-    ## Add body and attachment to email
+    # Add body and attachment to email
     email.attach(MIMEText(body, "plain"))
-    # attach_file = open(file, "rb") # open the file
-    # report = MIMEBase("application", "octate-stream")
-    # report.set_payload((attach_file).read())
-    # encoders.encode_base64(report)
+    attach_file = open(file, "rb") # open the file
+    report = MIMEBase("application", "octate-stream")
+    report.set_payload((attach_file).read())
+    encoders.encode_base64(report)
 
 
-    ##add report header with the file name
-    #report.add_header("Content-Decomposition", "attachment", filename = file)
-    #email.attach(report)
+    #add report header with the file name
+    report.add_header("Content-Decomposition", "attachment", filename = file)
+    email.attach(report)
 
 
 
