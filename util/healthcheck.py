@@ -1,5 +1,5 @@
 import pandas as pd
-from report import *
+from .report import *
 
 def check_rows(filename):
     '''
