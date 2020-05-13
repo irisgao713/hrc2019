@@ -16,7 +16,7 @@ from scrapy.settings import default_settings
 from util.util import *
 from util.logger import set_params
 from util.root import from_root
-from util.email import notify
+from util.report import notify
 from util.healthcheck import check_rows
 from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
 from crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
