@@ -73,11 +73,7 @@ def getFiles(ad_type):
     return all_filenames
 
 
-def rand_min():
-    '''
-    Return a random number between 0 and 60
-    '''
-    return random.randint(0,60)
+
 
 if __name__ == '__main__':
     print('Reminder: Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
