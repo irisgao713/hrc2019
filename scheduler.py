@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     # initiate logger to store error message
     logger = logging.getLogger(__name__)
-    set_params(logger, from_root("../log/scheduler.log""))
+    set_params(logger, from_root("../log/scheduler.log"))
 
     scheduler = TwistedScheduler()
 
