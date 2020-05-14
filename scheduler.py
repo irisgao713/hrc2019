@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     # initiate logger to store error message
     logger = logging.getLogger(__name__)
-    set_params(logger, from_root("log\\scheduler.log"))
+    set_params(logger, from_root("../log/scheduler.log""))
 
     scheduler = TwistedScheduler()
 
@@ -113,15 +113,18 @@ if __name__ == '__main__':
         reactor.run()
   
     except (SystemExit):
-        notify("forcequit")
-
-        reactor.stop()
-        print("Finish executing script.")
+        logger.exception("Scheduler: System Exit")
+    #     notify("forcequit")
+    #     reactor.stop()
+    #     print("Finish executing script.")
     except (Exception):
-        logger.exception("Scheduler: Fatal Error")
-        notify("forcequit")
+        logger.exception("Scheduler: Exception")
+       
+        # logger.exception("Scheduler: Fatal Error")
+        # notify("forcequit")
     except (KeyboardInterrupt):
-        notify("forcequit")
-
-        reactor.stop()
-        print("Finish executing script.")
+        logger.exception("Scheduler: KeyboardInterrupt")
+       
+        # notify("forcequit")
+        # reactor.stop()
+        # print("Finish executing script.")
