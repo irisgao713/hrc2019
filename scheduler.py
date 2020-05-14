@@ -113,10 +113,15 @@ if __name__ == '__main__':
         reactor.run()
   
     except (SystemExit):
-        pass
+        notify("forcequit")
+
+        reactor.stop()
+        print("Finish executing script.")
     except (Exception):
         logger.exception("Scheduler: Fatal Error")
         notify("forcequit")
     except (KeyboardInterrupt):
+        notify("forcequit")
+
         reactor.stop()
         print("Finish executing script.")
