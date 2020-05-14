@@ -79,6 +79,7 @@ if __name__ == '__main__':
 
     # initiate logger to store error message
     logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
     set_params(logger, from_root("../log/scheduler.log"))
 
     scheduler = TwistedScheduler()
