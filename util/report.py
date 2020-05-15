@@ -23,7 +23,8 @@ def notify(issue):
     body = body_text(issue)
 
     sender_email = "scraperinfosender@yahoo.com"
-    receiver_email = "scraperinfosender@yahoo.com"
+    #receiver_email = "scraperinfosender@yahoo.com"
+    receiver_email = "gaoyu226@gmail.com"
     file = "attachments/instructions.pdf" 
     password = "svoaptqjbjzghbmy"
 
