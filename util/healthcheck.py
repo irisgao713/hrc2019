@@ -10,5 +10,5 @@ def check_rows(filename):
 
     apa = pd.read_csv(fold + "apa/" + filename)
     roo = pd.read_csv(fold + "roo/" + filename)
-    if apa.shape[0] > 100 or roo.shape[0] > 100:
+    if apa.shape[0] < 100 or roo.shape[0] < 100:
         notify("contamination")
