@@ -67,9 +67,11 @@ def getFiles(ad_type):
     if not os.path.exists("raw_html/" + ad_type + "/" + directory):
         print('The directory: <' + str(directory) +'> does not exist in '+ "raw_html/" + ad_type )
         exit 
+    
 
- 
     all_filenames = ['file://' + os.getcwd() + '/' + i for i in glob.glob(path.format(extension))]
+
+    os.chdir('../rental_crawler') 
     return all_filenames
 
 
