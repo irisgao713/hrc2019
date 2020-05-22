@@ -9,6 +9,7 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from .util import last_month
+import os
 import datetime
 
 def notify(issue):
@@ -25,7 +26,7 @@ def notify(issue):
     sender_email = "scraperinfosender@yahoo.com"
     #receiver_email = "scraperinfosender@yahoo.com"
     receiver_email = "gaoyu226@gmail.com"
-    file = "util/attachments/instructions.pdf" 
+    file = os.getcwd() +"/attachments/instructions.pdf" 
     password = "svoaptqjbjzghbmy"
 
 
