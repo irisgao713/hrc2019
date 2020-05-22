@@ -46,7 +46,7 @@ def notify(issue):
 
 
     #add report header with the file name
-    report.add_header("Content-Decomposition", "attachment", filename = "instructions.pdf")
+    report.add_header("Content-Disposition", "attachment", filename = "instructions.pdf")
     email.attach(report)
 
 
