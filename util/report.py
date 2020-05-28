@@ -25,7 +25,7 @@ def notify(issue):
 
     sender_email = "scraperinfosender@yahoo.com"
     #receiver_email = "scraperinfosender@yahoo.com"
-    receiver_email = "riwamoto@shaw.ca"
+    receiver_email = "hrc.coordinator@ubc.ca"
     file = "util/attachments/instructions.pdf" 
     password = "svoaptqjbjzghbmy"
 
