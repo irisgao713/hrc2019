@@ -77,7 +77,7 @@ elif mode == 'apa':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(DeltaApaSpider)
+    process.crawl(ApaSpider)
     process.start()
     
     
@@ -103,7 +103,7 @@ elif mode == 'roo':
         #os.chdir(folder)  
 
     process = CrawlerProcess()
-    process.crawl(DeltaRooSpider)
+    process.crawl(RooSpider)
     process.start()
 
 else:
