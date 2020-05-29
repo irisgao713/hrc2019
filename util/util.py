@@ -117,6 +117,18 @@ def last_month():
 
     return ll 
 
+def this_month():
+    '''
+    Return the current month in the format of YYYY-MM
+    '''
+    month = datetime.date.today().month 
+    if month < 10:
+        ll = str(datetime.date.today().year) + '-0' + str(month)
+    else:
+        ll = str(datetime.date.today().year) + '-' + str(month)
+
+    return ll 
+
 
 def rand_min():
     '''
