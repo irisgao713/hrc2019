@@ -8,7 +8,10 @@ def check_rows(filename):
 
     fold = "../results/parsed_raw/"
 
-    apa = pd.read_csv(fold + "apa/" + filename)
-    roo = pd.read_csv(fold + "roo/" + filename)
-    if apa.shape[0] < 100 or roo.shape[0] < 100:
-        notify("contamination")
+    try:
+        apa = pd.read_csv(fold + "apa/" + filename)
+        roo = pd.read_csv(fold + "roo/" + filename)
+        if apa.shape[0] < 100 or roo.shape[0] < 100:
+            notify("contamination")
+    except pd.errors.EmptyDataError:
+         notify("contamination")
