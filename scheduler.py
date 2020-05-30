@@ -77,8 +77,8 @@ def getFiles(ad_type):
 
 def mkdir():
     os.chdir('../results') 
-    fold1 = "raw_html/apa/" +this_month() +"test"
-    fold2 = "raw_html/roo/" +this_month() + "test"
+    fold1 = "raw_html/apa/" +this_month() 
+    fold2 = "raw_html/roo/" +this_month() 
 
     os.mkdir(fold1)
     os.mkdir(fold2)
@@ -100,7 +100,7 @@ if __name__ == '__main__':
 
     process = CrawlerProcess()
     ## On the first day of each month, disable and reset scrapy deltafetch, retrieve all available ads on the domain
-    scheduler.add_job(mkdir, 'cron',  day='29', hour=15, minute=rand_min()) 
+    scheduler.add_job(mkdir, 'cron',  day='1', hour=5, minute=rand_min()) 
     scheduler.add_job(process.crawl, 'cron', args =[ApaSpider], day='1', hour=8, minute=rand_min())
     scheduler.add_job(process.crawl,'cron', args=[RooSpider], day='1', hour=8, minute=rand_min())
 
