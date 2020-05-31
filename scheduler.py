@@ -18,7 +18,7 @@ from util.logger import set_params
 from util.root import from_root
 from util.report import notify
 from util.healthcheck import check_rows
-from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
+from crawlers.spiders.cl_listings_apa import ApaSpider, DeltaApaSpider
 from crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
 from crawlers.spiders.cl_listings_local import CLLSpider
 
