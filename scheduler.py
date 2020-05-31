@@ -105,8 +105,8 @@ if __name__ == '__main__':
     scheduler.add_job(process.crawl,'cron', args=[RooSpider], day='1', hour=8, minute=rand_min())
 
     ## On every day starting on the 2nd day of the month, enable scrapy deltafetch so that the scarper skips duplicates
-    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=13, minute=rand_min())
-    scheduler.add_job(process.crawl,'cron', args=[DeltaRooSpider], day= '2/1',  hour=13, minute=rand_min())
+    scheduler.add_job(process.crawl, 'cron', args =[DeltaApaSpider], day= '2/1', hour=15, minute=rand_min())
+    scheduler.add_job(process.crawl,'cron', args=[DeltaRooSpider], day= '2/1',  hour=15, minute=rand_min())
 
     process1 = ArchiveProcess('apa')
     process2 = ArchiveProcess('roo')
