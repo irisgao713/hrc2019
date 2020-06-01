@@ -103,3 +103,5 @@ DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
 DELTAFETCH_ENABLED = True
+
+CLOSESPIDER_ITEMCOUNT = 1000
