@@ -38,7 +38,7 @@ class DeltaRooSpider(CrawlSpider):
     custom_settings = {
         'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': True,
-        'CLOSESPIDER_ITEMCOUNT' : 1000,
+        'CLOSESPIDER_ITEMCOUNT' : 900,
         'SPIDER_MIDDLEWARES': {
             'scrapy_deltafetch.DeltaFetch': 120,
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
@@ -103,7 +103,7 @@ class RooSpider(CrawlSpider):
         'LOG_LEVEL': 'INFO',
         'DELTAFETCH_ENABLED': False,
         'DELTAFETCH_RESET':True,
-        'CLOSESPIDER_ITEMCOUNT' : 1000,
+        'CLOSESPIDER_ITEMCOUNT' : 900,
         'SPIDER_MIDDLEWARES': {
             'scrapy.spidermiddlewares.offsite.OffsiteMiddleware': None
         },
