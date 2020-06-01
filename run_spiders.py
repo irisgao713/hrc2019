@@ -8,7 +8,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.settings import default_settings
 from util.util import getArg
 from crawlers.spiders.cl_listings import CLSpider
-from crawlers.spiders.cl_listings_html import ApaSpider, DeltaApaSpider
+from crawlers.spiders.cl_listings_apa import ApaSpider, DeltaApaSpider
 from crawlers.spiders.cl_listings_roo import RooSpider, DeltaRooSpider
 from crawlers.spiders.cl_listings_local import CLLSpider
 from twisted.internet import reactor
