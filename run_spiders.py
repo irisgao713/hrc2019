@@ -43,7 +43,7 @@ if mode == 'archive_apa':
 
     
     process1.crawl(CLLSpider,start_urls = all_filenames)
-
+    process1.start()
 elif mode =='archive_roo':
 
     #### roo
